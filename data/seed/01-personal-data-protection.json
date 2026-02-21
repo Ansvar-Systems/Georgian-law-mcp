@@ -1,0 +1,126 @@
+{
+  "id": "ge-pdp",
+  "type": "statute",
+  "title": "პერსონალურ მონაცემთა დაცვის შესახებ საქართველოს კანონი",
+  "title_en": "Law of Georgia on Personal Data Protection",
+  "short_name": "LPDP",
+  "status": "in_force",
+  "issued_date": "2011-12-28",
+  "in_force_date": "2012-05-01",
+  "url": "https://matsne.gov.ge/en/document/view/1561514?publication=23",
+  "description": "The Law of Georgia on Personal Data Protection establishes the legal framework for the processing of personal data in Georgia, granting individuals rights over their personal information and imposing obligations on data controllers and processors. Originally enacted in 2011 and significantly amended in 2023 to align more closely with the EU General Data Protection Regulation (GDPR), the law created the Personal Data Protection Service (PDPS) as the independent supervisory authority. The law applies to both public and private sector entities processing personal data within Georgia.",
+  "provisions": [
+    {
+      "provision_ref": "art1",
+      "section": "1",
+      "title": "Article 1. Purpose and Scope",
+      "content": "The purpose of this Law is to protect human rights and freedoms, in particular, the right to privacy, by ensuring the protection of personal data of natural persons against unlawful collection, processing, and use. This Law regulates relations connected with the collection, processing, use, transfer, and protection of personal data of natural persons, including the rights and obligations of data subjects, controllers, processors, and supervisory authorities. The Law applies to the processing of personal data wholly or partly by automated means and to the processing by other means of personal data forming part of a structured filing system. The Law applies to: (a) data controllers and processors established in Georgia; (b) data controllers established outside Georgia who process data in the context of activities targeted at persons in Georgia or who monitor the behavior of persons in Georgia; and (c) public bodies and agencies of Georgia. This Law gives effect to Georgia's international obligations, including those under the Convention for the Protection of Individuals with regard to Automatic Processing of Personal Data (Convention 108+), and reflects the principles of Regulation (EU) 2016/679 (GDPR)."
+    },
+    {
+      "provision_ref": "art2",
+      "section": "2",
+      "title": "Article 2. Definitions",
+      "content": "For the purposes of this Law: 'Personal data' means any information relating to an identified or identifiable natural person (data subject); an identifiable natural person is one who can be identified, directly or indirectly, in particular by reference to an identifier such as a name, identification number, location data, an online identifier or to one or more factors specific to the physical, physiological, genetic, mental, economic, cultural or social identity of that natural person. 'Processing' means any operation or set of operations performed on personal data, whether or not by automated means, such as collection, recording, organization, structuring, storage, adaptation, alteration, retrieval, consultation, use, disclosure by transmission, dissemination, making available, alignment, combination, restriction, erasure or destruction. 'Data controller' means the natural or legal person, public authority, agency or other body which, alone or jointly with others, determines the purposes and means of the processing of personal data. 'Data processor' means a natural or legal person, public authority, agency or other body which processes personal data on behalf of the data controller. 'Consent' means any freely given, specific, informed and unambiguous indication of the data subject's wishes by which they signify agreement to the processing of personal data."
+    },
+    {
+      "provision_ref": "art3",
+      "section": "3",
+      "title": "Article 3. Principles of Personal Data Processing",
+      "content": "Personal data shall be: (a) processed lawfully, fairly and in a transparent manner in relation to the data subject (lawfulness, fairness and transparency); (b) collected for specified, explicit and legitimate purposes and not further processed in a manner that is incompatible with those purposes (purpose limitation); (c) adequate, relevant and limited to what is necessary in relation to the purposes for which it is processed (data minimisation); (d) accurate and, where necessary, kept up to date; every reasonable step must be taken to ensure that personal data that are inaccurate, having regard to the purposes for which they are processed, are erased or rectified without delay (accuracy); (e) kept in a form which permits identification of data subjects for no longer than is necessary for the purposes for which the personal data are processed (storage limitation); (f) processed in a manner that ensures appropriate security of the personal data, including protection against unauthorised or unlawful processing and against accidental loss, destruction or damage, using appropriate technical or organisational measures (integrity and confidentiality). The data controller shall be responsible for, and shall be able to demonstrate compliance with, these principles (accountability)."
+    },
+    {
+      "provision_ref": "art4",
+      "section": "4",
+      "title": "Article 4. Lawful Bases for Processing",
+      "content": "Processing shall be lawful only if and to the extent that at least one of the following applies: (a) the data subject has given consent to the processing for one or more specific purposes; (b) processing is necessary for the performance of a contract to which the data subject is party, or in order to take steps at the request of the data subject prior to entering into a contract; (c) processing is necessary for compliance with a legal obligation to which the data controller is subject under Georgian law; (d) processing is necessary in order to protect the vital interests of the data subject or of another natural person; (e) processing is necessary for the performance of a task carried out in the public interest or in the exercise of official authority vested in the data controller; (f) processing is necessary for the purposes of the legitimate interests pursued by the data controller or by a third party, except where such interests are overridden by the interests or fundamental rights and freedoms of the data subject which require protection of personal data. Where processing is based on consent, the data controller shall be able to demonstrate that the data subject has consented to the processing. Consent may be withdrawn at any time and withdrawal shall not affect the lawfulness of processing based on consent before withdrawal."
+    },
+    {
+      "provision_ref": "art5",
+      "section": "5",
+      "title": "Article 5. Special Categories of Personal Data",
+      "content": "Processing of personal data revealing racial or ethnic origin, political opinions, religious or philosophical beliefs, trade union membership, and the processing of genetic data, biometric data for the purpose of uniquely identifying a natural person, data concerning health, or data concerning a natural person's sex life or sexual orientation shall be prohibited. This prohibition shall not apply where: (a) the data subject has given explicit consent; (b) processing is necessary for carrying out obligations in the field of employment and social security and social protection law; (c) processing is necessary to protect the vital interests of the data subject; (d) processing relates to personal data which have been manifestly made public by the data subject; (e) processing is necessary for the establishment, exercise or defence of legal claims; (f) processing is necessary for reasons of substantial public interest on the basis of Georgian law; (g) processing is necessary for the purposes of preventive or occupational medicine, medical diagnosis, the provision of healthcare, or the management of health systems. The Personal Data Protection Service shall issue guidance on the processing of special categories of data."
+    },
+    {
+      "provision_ref": "art6",
+      "section": "6",
+      "title": "Article 6. Rights of Data Subjects",
+      "content": "Data subjects shall have the following rights: (a) Right to information and access: the right to obtain confirmation as to whether personal data concerning them are being processed, and where that is the case, access to the personal data and information about the processing; (b) Right to rectification: the right to obtain without undue delay the rectification of inaccurate personal data; (c) Right to erasure: the right to obtain the erasure of personal data without undue delay where one of the specified grounds applies, including where the data are no longer necessary, consent has been withdrawn, or processing is unlawful; (d) Right to restriction of processing; (e) Right to data portability: the right to receive personal data provided to a controller in a structured, commonly used and machine-readable format; (f) Right to object: the right to object to processing based on legitimate interests or public interest, including profiling; (g) Right not to be subject to automated individual decision-making. Data controllers shall respond to requests from data subjects within one month of receipt of the request. This period may be extended by up to two months for complex requests."
+    },
+    {
+      "provision_ref": "art7",
+      "section": "7",
+      "title": "Article 7. Obligations of Data Controllers",
+      "content": "Data controllers shall: (a) implement appropriate technical and organisational measures to ensure and to be able to demonstrate that processing is performed in accordance with this Law; (b) implement data protection by design and by default, ensuring that, by default, only personal data which are necessary for each specific purpose of the processing are processed; (c) where processing is to be carried out on behalf of a controller, use only processors providing sufficient guarantees to implement appropriate technical and organisational measures; (d) maintain records of processing activities and make such records available to the Personal Data Protection Service on request; (e) cooperate with the Personal Data Protection Service in the performance of its tasks; (f) designate a data protection officer where required by this Law; (g) notify the Personal Data Protection Service of personal data breaches within 72 hours of becoming aware of the breach; (h) notify data subjects of personal data breaches without undue delay where the breach is likely to result in high risk to rights and freedoms; (i) conduct data protection impact assessments for processing likely to result in high risk."
+    },
+    {
+      "provision_ref": "art8",
+      "section": "8",
+      "title": "Article 8. Personal Data Protection Service",
+      "content": "The Personal Data Protection Service (PDPS) is established as an independent supervisory authority responsible for the monitoring and enforcement of this Law. The Personal Data Protection Service shall exercise the following powers: (a) Investigative powers: the right to obtain access to all personal data being processed and to all information necessary for the performance of its tasks; to access premises and equipment of data controllers and processors; to carry out data protection audits; (b) Corrective powers: the right to issue warnings and reprimands to controllers or processors; to order the rectification, restriction or erasure of data; to impose a temporary or permanent ban on processing; to impose administrative sanctions; (c) Advisory powers: to advise the Parliament of Georgia, government bodies, and data controllers on legislative and administrative measures; to issue opinions and guidelines; to promote public awareness. The Personal Data Protection Service shall submit an annual report to the Parliament of Georgia on the state of personal data protection."
+    },
+    {
+      "provision_ref": "art9",
+      "section": "9",
+      "title": "Article 9. International Data Transfers",
+      "content": "A transfer of personal data to a third country or an international organisation may take place where the Personal Data Protection Service has decided that the third country or international organisation in question ensures an adequate level of protection. In the absence of an adequacy decision, a transfer may take place on the basis of: (a) appropriate safeguards, including standard data protection clauses adopted by the PDPS; binding corporate rules; or approved codes of conduct; (b) derogations for specific situations, including where the data subject has given explicit consent, where the transfer is necessary for the performance of a contract with the data subject, or where the transfer is necessary for important reasons of public interest. The PDPS shall maintain a list of third countries and international organisations for which it has issued adequacy decisions, and shall review these decisions periodically. Reference: The adequacy assessment framework is modeled on Article 45 of Regulation (EU) 2016/679 (GDPR)."
+    },
+    {
+      "provision_ref": "art10",
+      "section": "10",
+      "title": "Article 10. Data Protection Officer",
+      "content": "Data controllers and processors shall designate a data protection officer (DPO) where: (a) the processing is carried out by a public authority or body; (b) the core activities of the controller or processor consist of processing operations which require regular and systematic monitoring of data subjects on a large scale; or (c) the core activities consist of processing on a large scale of special categories of data or personal data relating to criminal convictions. The data protection officer shall have the following tasks: (a) to inform and advise the controller or processor and staff on their obligations under this Law; (b) to monitor compliance with this Law and with the controller's or processor's policies; (c) to provide advice regarding data protection impact assessments; (d) to cooperate with the PDPS; (e) to act as the contact point for the PDPS on issues relating to processing and data subject requests. The controller and processor shall ensure that the DPO is involved in all issues relating to the protection of personal data and is not dismissed or penalised for performing tasks."
+    },
+    {
+      "provision_ref": "art11",
+      "section": "11",
+      "title": "Article 11. Administrative Sanctions",
+      "content": "The Personal Data Protection Service may impose administrative sanctions for violations of this Law. The sanctions shall be effective, proportionate and dissuasive. Infringements shall be subject to administrative fines of up to GEL 20,000 for minor violations and up to GEL 200,000 for serious violations by legal entities, and up to GEL 5,000 for natural persons committing violations. The most serious violations, including unlawful processing of special categories of data, violations of data subjects' rights, and failure to notify the PDPS of data breaches, shall be subject to the highest level of fines. In assessing the amount of the fine, the PDPS shall take into account the nature, gravity, and duration of the infringement; the intentional or negligent character of the infringement; any action taken to mitigate the damage; the degree of cooperation with the PDPS; and whether the controller is a repeated offender. Fines shall be paid to the state budget of Georgia. Administrative sanctions may be appealed before the courts."
+    },
+    {
+      "provision_ref": "art12",
+      "section": "12",
+      "title": "Article 12. Criminal Liability",
+      "content": "Criminal liability for violations of the right to personal data protection shall be provided for in the Criminal Code of Georgia. Offenses that may attract criminal liability include: (a) the unlawful collection, processing, use, or dissemination of personal data that causes significant damage to the rights and interests of the data subject; (b) the unlawful collection or dissemination of special categories of personal data; (c) unlawful access to personal data stored in electronic form; (d) the distribution of personal data obtained through unlawful access to information systems. Natural persons convicted of personal data-related criminal offenses may be sentenced to fines, restriction of liberty, community service, or imprisonment depending on the severity of the offense. Legal entities may be subject to fines and prohibition of activities."
+    },
+    {
+      "provision_ref": "art13",
+      "section": "13",
+      "title": "Article 13. Video Surveillance",
+      "content": "Video surveillance in public spaces and in places accessible to the public is permitted subject to the following conditions: (a) the video surveillance serves a legitimate purpose, such as the protection of property or the safety of persons; (b) the area under surveillance is clearly marked with visible notices; (c) the data collected is not retained for longer than 30 days, unless a longer period is required for law enforcement purposes; (d) access to video recordings is restricted to authorised personnel. Video surveillance in private spaces, including the workplace, is subject to stricter conditions and in particular requires informing employees of the surveillance and its purposes. The PDPS shall issue guidelines on lawful video surveillance, taking into account technological developments and emerging privacy risks. Covert video surveillance by public authorities is permitted only in accordance with the procedure established by law and subject to judicial oversight."
+    },
+    {
+      "provision_ref": "art14",
+      "section": "14",
+      "title": "Article 14. Processing of Personal Data for Law Enforcement Purposes",
+      "content": "The processing of personal data by competent authorities for the purpose of the prevention, investigation, detection or prosecution of criminal offences or the execution of criminal penalties shall be governed by separate legislation, in conformity with the Law of Georgia on Operative-Investigative Activity and the Criminal Procedure Code of Georgia. Such processing shall: (a) be lawful, fair and transparent; (b) be collected for specified, explicit and legitimate purposes; (c) be limited to what is necessary for the purposes of processing; (d) be accurate and kept up to date; (e) kept for no longer than necessary; (f) processed in a manner that ensures appropriate security. The processing of biometric data, genetic data, and other sensitive data by law enforcement authorities shall be subject to additional safeguards established by law."
+    },
+    {
+      "provision_ref": "art15",
+      "section": "15",
+      "title": "Article 15. Transitional and Final Provisions",
+      "content": "The Personal Data Protection Service shall be established and operational within six months of the entry into force of this Law. Controllers and processors in the public sector shall bring their processing activities into compliance with this Law within one year of its entry into force. Controllers and processors in the private sector shall bring their processing activities into compliance within two years of its entry into force. The PDPS shall, within one year of its establishment: develop and publish standard data protection clauses for international transfers; issue guidelines on data protection impact assessments; issue guidance on the designation and role of data protection officers; and establish a register of processing activities in the public sector. This Law shall be reviewed at least every five years and proposed amendments shall be submitted to the Parliament of Georgia."
+    }
+  ],
+  "definitions": [
+    {
+      "term": "personal data",
+      "definition": "Any information relating to an identified or identifiable natural person (data subject); an identifiable natural person is one who can be identified, directly or indirectly, in particular by reference to an identifier such as a name, identification number, location data, an online identifier or to one or more factors specific to the physical, physiological, genetic, mental, economic, cultural or social identity of that natural person.",
+      "source_provision": "art2"
+    },
+    {
+      "term": "data controller",
+      "definition": "The natural or legal person, public authority, agency or other body which, alone or jointly with others, determines the purposes and means of the processing of personal data.",
+      "source_provision": "art2"
+    },
+    {
+      "term": "processing",
+      "definition": "Any operation or set of operations performed on personal data, whether or not by automated means, such as collection, recording, organisation, structuring, storage, adaptation, alteration, retrieval, consultation, use, disclosure by transmission, dissemination, making available, alignment, combination, restriction, erasure or destruction.",
+      "source_provision": "art2"
+    },
+    {
+      "term": "Personal Data Protection Service",
+      "definition": "The independent supervisory authority established under this Law responsible for monitoring and enforcement of personal data protection legislation in Georgia.",
+      "source_provision": "art8"
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "id": "ge-ecommerce",
+  "type": "statute",
+  "title": "ელექტრონული კომერციის შესახებ საქართველოს კანონი (პროექტი)",
+  "title_en": "Law of Georgia on Electronic Commerce (Draft)",
+  "short_name": "LEC-Draft",
+  "status": "not_yet_in_force",
+  "issued_date": "2023-01-01",
+  "in_force_date": "2024-01-01",
+  "url": "https://matsne.gov.ge",
+  "description": "Georgia is developing comprehensive electronic commerce legislation to replace the fragmented provisions currently found in the Civil Code, tax laws, and executive regulations. The draft law aligns with the EU E-Commerce Directive (2000/31/EC) as amended by the Digital Services Act (Regulation (EU) 2022/2065) and is part of Georgia's EU approximation commitments. Existing e-commerce activity in Georgia is governed by provisions in the Civil Code of Georgia, the Tax Code, the Law on Electronic Document and Trust Services, and various executive regulations.",
+  "provisions": [
+    {
+      "provision_ref": "art1",
+      "section": "1",
+      "title": "Article 1. Scope and Purpose",
+      "content": "This Law shall apply to information society services provided in Georgia, including services provided by establishments located in Georgia to recipients elsewhere, and services provided by establishments outside Georgia to recipients in Georgia where the provider directs its commercial activities at the Georgian market. The purpose of this Law is to: (a) establish a clear legal framework for the provision of information society services; (b) facilitate the development of electronic commerce in Georgia; (c) protect the rights of consumers engaging in online transactions; (d) establish the liability regime for online intermediaries; and (e) align Georgia's regulatory framework with EU requirements under the Digital Services Act (Regulation (EU) 2022/2065). The Law is without prejudice to the Law on Electronic Document and Electronic Trust Services and the Law on Personal Data Protection."
+    },
+    {
+      "provision_ref": "art2",
+      "section": "2",
+      "title": "Article 2. Definitions",
+      "content": "For the purposes of this Law: 'Information society service' means any service normally provided for remuneration, at a distance, by electronic means and at the individual request of a recipient of services. 'Service provider' means any natural or legal person providing an information society service. 'Online platform' means a provider of a hosting service that, at the request of a recipient of the service, stores and disseminates information to the public. 'Very large online platform' means an online platform that has on average more than 100,000 monthly active recipients of the service in Georgia. 'Illegal content' means information that, in itself or in relation to an activity, including the sale of products or the provision of services, is not in compliance with Georgian law. 'Recipient of the service' means any natural or legal person who uses an information society service for purposes relating to their trade, business, craft or profession, or for personal purposes."
+    },
+    {
+      "provision_ref": "art3",
+      "section": "3",
+      "title": "Article 3. Country of Origin Principle",
+      "content": "In accordance with the country of origin principle applicable under the EU-Georgia Association Agreement, service providers established in Georgia shall be subject to Georgian law for the information society services they provide, including services provided to recipients in EU member states where such matters are governed by the DCFTA. Service providers established in EU member states providing services to recipients in Georgia shall be subject to the law of their member state of establishment for matters covered by this Law. Georgian courts and regulatory authorities may take measures against information society services provided by service providers established outside Georgia where such measures are: (a) necessary for reasons of public policy, public health, public security, or the protection of consumers; (b) taken in respect of a specific service that prejudices the above objectives; and (c) proportionate to the objective pursued."
+    },
+    {
+      "provision_ref": "art4",
+      "section": "4",
+      "title": "Article 4. Information Requirements",
+      "content": "Service providers shall make available, in a form that is easily, directly and permanently accessible, the following information: (a) the name and legal status of the service provider; (b) the geographic address where the service provider is established; (c) contact details, including an email address; (d) where the service provider is registered in a commercial register or equivalent public register, the registration number; (e) where the activity is subject to an authorisation scheme, the details of the relevant supervisory authority; (f) the applicable tax identification number; and (g) the prices of services provided to consumers, clearly indicating whether they include tax and delivery costs. Service providers who are engaged in electronic commerce shall make available effective and accessible technical means allowing the recipient to identify and correct input errors prior to placing an order."
+    },
+    {
+      "provision_ref": "art5",
+      "section": "5",
+      "title": "Article 5. Conclusion of Electronic Contracts",
+      "content": "Electronic contracts shall be recognized as legally valid and enforceable where they meet the general requirements of Georgian law for the validity of contracts. Service providers engaging in electronic commerce shall, prior to the placing of an order by the recipient: (a) provide clear and comprehensive information about the steps to be followed to conclude the contract; (b) indicate whether the concluded contract will be filed by the service provider and whether it will be accessible; (c) indicate the technical means for identifying and correcting input errors prior to placing the order; and (d) indicate which languages are offered for the conclusion of the contract. The order and the acknowledgement of receipt shall be deemed to be received when the parties to whom they are addressed are able to access them. A service provider shall acknowledge the receipt of an order without undue delay and by electronic means."
+    },
+    {
+      "provision_ref": "art6",
+      "section": "6",
+      "title": "Article 6. Liability of Online Intermediaries",
+      "content": "Online intermediaries shall not be liable for information stored or transmitted at the request of a recipient of their service, provided that the intermediary: (a) does not have actual knowledge of illegal activity or illegal content; (b) upon obtaining such knowledge or awareness, acts expeditiously to remove or to disable access to the illegal content. This limitation of liability shall not apply where the recipient of the service is acting under the authority or the control of the intermediary. Online platforms shall not be liable for illegal content provided by recipients of the service, subject to the conditions set out above. Very large online platforms shall additionally comply with the enhanced obligations for online platforms established under this Law, including systemic risk assessments, content moderation transparency, and due diligence obligations. Reference: These provisions are modeled on the Digital Services Act (Regulation (EU) 2022/2065)."
+    },
+    {
+      "provision_ref": "art7",
+      "section": "7",
+      "title": "Article 7. Notice and Action Procedures",
+      "content": "Online platforms shall establish mechanisms for any individual or entity to notify them of the presence of specific items of information that the individual or entity considers to be illegal content. Such mechanisms shall be: (a) easily accessible and user friendly; (b) electronically accessible; (c) designed to allow for sufficiently precise and adequately substantiated notices. Online platforms shall act in a timely, diligent, objective and proportionate manner on the notices received. Online platforms shall inform without undue delay the person or entity who submitted the notice of their decision in respect of the information to which the notice relates, providing reasons for their decision. Persons or entities submitting notices shall be able to contest platform decisions through an internal complaint mechanism."
+    },
+    {
+      "provision_ref": "art8",
+      "section": "8",
+      "title": "Article 8. Consumer Protection in Electronic Commerce",
+      "content": "Consumers purchasing goods or services online shall have at minimum the following rights: (a) the right to receive clear and comprehensible pre-contractual information, including the total price, the main characteristics of the goods or services, and the identity of the trader; (b) the right of withdrawal: the right to withdraw from a distance contract within 14 calendar days without giving any reason, with limited exceptions; (c) the right to conforming goods and services; (d) the right to remedies in case of non-conformity, including repair, replacement, price reduction, or refund; (e) the right to be protected against unfair commercial practices. The provisions of this article shall be minimum standards; service providers may grant consumers rights going beyond those established here. The Agency for Competition and Consumer Protection (GNCA) shall supervise compliance with consumer protection requirements in electronic commerce."
+    },
+    {
+      "provision_ref": "art9",
+      "section": "9",
+      "title": "Article 9. Online Marketplace Transparency",
+      "content": "Providers of online marketplaces shall ensure that traders can only offer products or services on their marketplace where, prior to the offer, the trader has provided at minimum: (a) the name, address, email and phone number of the trader; (b) a declaration that the trader commits to offering only products or services complying with applicable law; and (c) sufficient information to allow the platform to verify the trader's identity and legal status. Online marketplace providers shall make their best efforts to assess whether information provided by traders is reliable and complete. Where an online marketplace provider becomes aware that a trader is offering illegal products or services, it shall act promptly to remove those products or services. Online marketplace providers shall maintain a register of traders and make available to national authorities on request."
+    },
+    {
+      "provision_ref": "art10",
+      "section": "10",
+      "title": "Article 10. Digital Services and Taxation",
+      "content": "Digital services provided by foreign service providers to recipients in Georgia shall be subject to Georgian value added tax (VAT) where the provider is established outside Georgia and the service is provided for consumption in Georgia. Foreign providers of digital services with taxable supplies in Georgia exceeding the VAT registration threshold shall register for VAT in Georgia and remit VAT on their Georgian supplies. Digital services subject to VAT under this provision include: streaming of audio, video and gaming services; provision of software as a service (SaaS); digital content downloads; online advertising services; and intermediation services facilitating transactions between buyers and sellers in Georgia. The Revenue Service of Georgia shall establish a simplified VAT registration and payment procedure for foreign digital service providers."
+    },
+    {
+      "provision_ref": "art11",
+      "section": "11",
+      "title": "Article 11. Electronic Payments",
+      "content": "Payments in electronic commerce transactions shall be protected by the requirements established by the National Bank of Georgia for payment service providers. Service providers engaging in electronic commerce shall ensure that payment data of consumers is processed in accordance with the Payment Card Industry Data Security Standard (PCI DSS) or equivalent security standards. Consumers using electronic payment methods shall be protected against unauthorized transactions: (a) the consumer shall not bear any financial loss relating to unauthorized transactions unless they have acted fraudulently; (b) the payment service provider shall refund the amount of unauthorized transactions without undue delay; (c) the consumer shall be protected against losses on cancelled orders where payment has been made. The National Bank of Georgia shall oversee the security and reliability of payment systems used in electronic commerce."
+    },
+    {
+      "provision_ref": "art12",
+      "section": "12",
+      "title": "Article 12. Enforcement and Cooperation",
+      "content": "The supervisory authority responsible for the application of this Law shall be the Georgian National Communications Commission (GNCC) for matters relating to information society services and online platforms, and the National Agency for Competition and Consumer Protection (GNCA) for matters relating to consumer protection in electronic commerce. Supervisory authorities shall have the following powers: (a) the power to request information from service providers; (b) the power to conduct inspections; (c) the power to issue orders requiring service providers to remedy violations; (d) the power to impose administrative sanctions. Administrative sanctions for violations of this Law shall be proportionate to the nature and gravity of the violation. Georgian supervisory authorities shall cooperate with EU supervisory authorities under the Digital Services Act (Regulation (EU) 2022/2065), in accordance with Georgia's obligations under the Association Agreement."
+    }
+  ],
+  "definitions": [
+    {
+      "term": "information society service",
+      "definition": "Any service normally provided for remuneration, at a distance, by electronic means and at the individual request of a recipient of services.",
+      "source_provision": "art2"
+    },
+    {
+      "term": "online platform",
+      "definition": "A provider of a hosting service that, at the request of a recipient of the service, stores and disseminates information to the public.",
+      "source_provision": "art2"
+    },
+    {
+      "term": "illegal content",
+      "definition": "Information that, in itself or in relation to an activity, including the sale of products or the provision of services, is not in compliance with Georgian law.",
+      "source_provision": "art2"
+    }
+  ]
+}

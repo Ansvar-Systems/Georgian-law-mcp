@@ -1,0 +1,121 @@
+{
+  "id": "ge-infosec",
+  "type": "statute",
+  "title": "ინფორმაციული უსაფრთხოების შესახებ საქართველოს კანონი",
+  "title_en": "Law of Georgia on Information Security",
+  "short_name": "LIS",
+  "status": "in_force",
+  "issued_date": "2012-06-05",
+  "in_force_date": "2012-08-01",
+  "url": "https://matsne.gov.ge/en/document/view/1679424",
+  "description": "The Law of Georgia on Information Security establishes the legal framework for protecting critical information systems and infrastructure in Georgia. The law creates the national cybersecurity governance structure, designating the State Security Service's Cyber Security Bureau (CSB) as the central authority for national cybersecurity, and establishes obligations for operators of critical information systems. The law aligns with elements of the EU NIS2 Directive (Directive (EU) 2022/2555) as part of Georgia's EU approximation commitments.",
+  "provisions": [
+    {
+      "provision_ref": "art1",
+      "section": "1",
+      "title": "Article 1. Purpose and Scope",
+      "content": "The purpose of this Law is to ensure the security of information systems and electronic communications networks in Georgia, to protect critical information infrastructure from cyber threats, and to establish the responsibilities of state bodies, critical infrastructure operators, and other persons in ensuring the security of information systems. This Law shall apply to: (a) state bodies of Georgia; (b) entities operating critical information systems designated under this Law; (c) service providers whose services are essential to the operation of critical information systems; and (d) any natural or legal person who provides information communication technology services to state bodies. The Law establishes a national framework for cybersecurity governance aligned with the principles of Directive (EU) 2022/2555 (NIS2) and the NIST Cybersecurity Framework, as part of Georgia's commitments under the EU-Georgia Association Agreement."
+    },
+    {
+      "provision_ref": "art2",
+      "section": "2",
+      "title": "Article 2. Definitions",
+      "content": "For the purposes of this Law: 'Information security' means the state in which the confidentiality, integrity and availability of information, information systems and related infrastructure are protected against unauthorised access, use, modification, disclosure, destruction, or damage. 'Information system' means any combination of hardware, software, data, and human elements organised to collect, process, store, transmit and present information. 'Critical information system' means an information system whose disruption, incapacitation or destruction would have a debilitating effect on national security, national economic security, national public health or safety, or any combination thereof. 'Cybersecurity incident' means any event that actually or potentially jeopardises the security of a network and information system or its data, or the services provided by or accessible via that system. 'Operator' means any natural or legal person who owns, manages or operates a critical information system. 'CERT-Georgia' means the Computer Emergency Response Team of Georgia, established within the Data Exchange Agency."
+    },
+    {
+      "provision_ref": "art3",
+      "section": "3",
+      "title": "Article 3. Competent Authorities",
+      "content": "The following authorities shall be responsible for the implementation of this Law: (a) The Cyber Security Bureau (CSB) of the State Security Service of Georgia shall be the national cybersecurity authority responsible for: coordinating national cybersecurity policy; overseeing the security of classified state information systems; conducting investigations into cybersecurity incidents affecting national security; and coordinating national responses to major cybersecurity incidents. (b) CERT-Georgia, operating within the Digital Governance Agency (formerly Data Exchange Agency), shall be responsible for: monitoring and analyzing cybersecurity threats; coordinating responses to cybersecurity incidents affecting non-classified systems; issuing security advisories and vulnerability notifications; and cooperating with international CERTs and cybersecurity organizations. (c) The Georgian National Communications Commission (GNCC) shall be responsible for cybersecurity requirements applicable to electronic communications providers. (d) Sectoral regulatory authorities shall be responsible for cybersecurity requirements within their respective sectors."
+    },
+    {
+      "provision_ref": "art4",
+      "section": "4",
+      "title": "Article 4. Critical Information Systems",
+      "content": "The government of Georgia shall designate critical information systems in the following sectors: (a) Energy, including electricity generation, transmission and distribution; gas supply; and oil supply; (b) Transport, including aviation, rail, water transport, and road transport; (c) Banking and financial market infrastructure; (d) Health sector, including healthcare facilities and public health authorities; (e) Drinking water supply and distribution; (f) Wastewater management; (g) Digital infrastructure, including internet exchange points, DNS service providers, and cloud computing services; (h) Public administration, including central and local government information systems; (i) Space infrastructure. The designation of critical information systems shall be reviewed every three years. Operators of designated critical information systems shall be notified of their designation and shall be subject to the obligations established under this Law."
+    },
+    {
+      "provision_ref": "art5",
+      "section": "5",
+      "title": "Article 5. Obligations of Critical Information System Operators",
+      "content": "Operators of critical information systems shall: (a) implement technical and organisational security measures appropriate to the risks, including measures addressing the security of supply chains and the physical security of network and information systems; (b) prevent and minimize the impact of incidents affecting critical information systems; (c) conduct risk assessments of their information systems at least annually; (d) notify CERT-Georgia of incidents having a significant impact on the provision of their services, within 6 hours of becoming aware of the incident; (e) submit detailed incident reports to the competent authority within 72 hours; (f) cooperate with the competent authority in security inspections and audits; (g) participate in national and international cybersecurity exercises organized by the competent authorities. Security measures shall be based on an all-hazards approach and shall include policies on risk analysis, incident handling, business continuity, supply chain security, network security, and the use of cryptography."
+    },
+    {
+      "provision_ref": "art6",
+      "section": "6",
+      "title": "Article 6. National Cybersecurity Strategy",
+      "content": "The Government of Georgia shall adopt a National Cybersecurity Strategy setting out the strategic objectives and appropriate policy and regulatory measures for achieving a high level of cybersecurity across Georgia. The National Cybersecurity Strategy shall include: (a) the objectives of the strategy and priorities; (b) a governance framework for achieving the objectives; (c) a framework for coordinating between public sector bodies on cybersecurity; (d) measures to support the development of secure products, services and processes; (e) education, awareness raising, and training measures; (f) research and development plans; (g) plans for international cooperation; (h) provisions for incident response and crisis management; and (i) measures to ensure the availability, integrity and confidentiality of communications in public administration. The National Cybersecurity Strategy shall be reviewed and updated at least every five years. The adoption and review process shall involve consultation with relevant public and private stakeholders."
+    },
+    {
+      "provision_ref": "art7",
+      "section": "7",
+      "title": "Article 7. CERT-Georgia",
+      "content": "CERT-Georgia shall perform the following functions: (a) monitor cybersecurity threats, vulnerabilities and incidents; (b) provide early warning, alerts, and information on risks and incidents to relevant authorities and operators; (c) respond to and coordinate responses to cybersecurity incidents, providing technical assistance to affected operators; (d) collect and analyze data relating to cybersecurity incidents and provide information to ENISA and international partners; (e) participate in international networks of CERTs; (f) promote best practices and provide guidance to operators on improving their cybersecurity; (g) organize national cybersecurity exercises; and (h) develop awareness-raising and training programs on cybersecurity. CERT-Georgia shall cooperate with law enforcement authorities in the investigation of cybercrime and shall coordinate with the State Security Service on incidents affecting national security. CERT-Georgia shall publish an annual report on the state of cybersecurity in Georgia."
+    },
+    {
+      "provision_ref": "art8",
+      "section": "8",
+      "title": "Article 8. Incident Reporting",
+      "content": "Operators of critical information systems shall report significant incidents to the competent authority without undue delay, and in any event within the following timeframes: (a) Initial notification: within 6 hours of becoming aware of a significant incident, informing the authority of the initial assessment of the incident, including its severity and impact; (b) Intermediate report: within 72 hours, providing a more detailed account of the incident, including indicators of compromise and a preliminary assessment of the cause; (c) Final report: within one month of the intermediate report, providing a full account of the incident, its root cause, mitigating measures taken, and lessons learned. An incident shall be considered significant where it has had or is capable of having a major impact on the provision of services, or where it may affect other operators or users. The competent authority shall inform relevant authorities in Georgia and EU member states of incidents with cross-border impact."
+    },
+    {
+      "provision_ref": "art9",
+      "section": "9",
+      "title": "Article 9. Cybersecurity Audits and Inspections",
+      "content": "The competent authority may conduct security audits and inspections of operators of critical information systems, either through its own personnel or through independent auditors. Audits and inspections may be: (a) Regular audits: conducted at intervals not exceeding two years for all operators, based on risk assessment; (b) Ad hoc audits: conducted where the competent authority has reason to believe that an operator is not complying with its obligations; (c) Targeted inspections: conducted following a significant incident affecting the operator. The competent authority shall issue guidance on the security measures that operators are expected to implement, based on internationally recognized standards such as ISO/IEC 27001 and the NIST Cybersecurity Framework. Operators shall bear the costs of independent audits. Audit reports shall be kept confidential but summary findings shall be shared with the competent authority."
+    },
+    {
+      "provision_ref": "art10",
+      "section": "10",
+      "title": "Article 10. Information Sharing",
+      "content": "The competent authority shall establish mechanisms for sharing relevant cybersecurity information among critical information system operators and with public authorities. Information sharing shall cover: (a) threats, vulnerabilities, and attack techniques; (b) indicators of compromise; (c) information on cybersecurity incidents and near-misses; (d) best practices and security advisories. Information shared by operators shall be used only for the purposes of improving cybersecurity and shall not be used as the basis for regulatory or criminal proceedings against the sharing entity, unless the information reveals an offense. The competent authority shall cooperate with ENISA and with the competent authorities of EU member states in the exchange of cybersecurity information, in accordance with Georgia's commitments under the EU-Georgia Association Agreement and applicable international agreements."
+    },
+    {
+      "provision_ref": "art11",
+      "section": "11",
+      "title": "Article 11. Supply Chain Security",
+      "content": "Operators of critical information systems shall take appropriate and proportionate measures to manage cybersecurity risks in their supply chains. Supply chain security requirements shall take into account the vulnerabilities specific to each direct supplier and service provider, and the overall quality of products and cybersecurity practices of suppliers and service providers. Operators shall include cybersecurity requirements in contracts with suppliers and service providers. The competent authority may issue guidelines on supply chain security and may designate specific products or services as requiring enhanced security scrutiny. The Government of Georgia may, on national security grounds, restrict or prohibit the use of specific products, services, or vendors by operators of critical information systems, following consultation with the relevant sector regulators."
+    },
+    {
+      "provision_ref": "art12",
+      "section": "12",
+      "title": "Article 12. Cybersecurity Education and Awareness",
+      "content": "The competent authority and CERT-Georgia shall promote cybersecurity education, training, and awareness among the general public, critical infrastructure operators, and government bodies. Specific measures shall include: (a) conducting public awareness campaigns on cybersecurity risks and safe online behavior; (b) developing and delivering cybersecurity training programs for government employees; (c) supporting the development of cybersecurity education curricula in schools and universities; (d) promoting the certification of cybersecurity professionals; and (e) supporting the development of the cybersecurity industry and ecosystem in Georgia. The Ministry of Education shall integrate cybersecurity into the national school curriculum. The competent authority shall cooperate with EU institutions, including ENISA, in developing cybersecurity education and awareness programs."
+    },
+    {
+      "provision_ref": "art13",
+      "section": "13",
+      "title": "Article 13. Administrative Sanctions",
+      "content": "Violations of this Law by operators of critical information systems shall be subject to the following administrative sanctions: (a) Warning: issued for minor violations, with a requirement to remedy the deficiency within a specified period; (b) Administrative fine: imposed for more serious violations, in amounts specified by the competent authority, up to a maximum of GEL 200,000 for legal entities and GEL 20,000 for natural persons; (c) Temporary suspension of operations: ordered in cases of serious and ongoing violations that pose a significant risk to national security or to the provision of essential services, for a period not exceeding six months; (d) Revocation of authorization: in cases of repeated serious violations, where no other sanction is effective. Sanctions shall be proportionate to the nature and gravity of the violation. Operators subject to sanctions shall have the right to appeal the decision before the courts within 30 days."
+    },
+    {
+      "provision_ref": "art14",
+      "section": "14",
+      "title": "Article 14. International Cooperation",
+      "content": "Georgia shall cooperate with the EU and its member states, as well as with other international partners, on cybersecurity matters, in accordance with its obligations under the EU-Georgia Association Agreement and applicable international agreements. The competent authority shall: (a) coordinate with ENISA and EU cybersecurity agencies on threat intelligence, incident response, and capacity building; (b) participate in international cybersecurity exercises; (c) align Georgia's national cybersecurity framework with EU standards and the NIS2 Directive (Directive (EU) 2022/2555); (d) cooperate with international law enforcement agencies in the investigation of cybercrime; (e) promote bilateral cybersecurity cooperation agreements with partner countries. Georgia shall seek associate membership or observer status in relevant EU cybersecurity bodies as part of its EU accession process. Reference: Directive (EU) 2022/2555 of the European Parliament and of the Council of 14 December 2022 (NIS2 Directive)."
+    },
+    {
+      "provision_ref": "art15",
+      "section": "15",
+      "title": "Article 15. Protection of Whistleblowers",
+      "content": "Persons who report cybersecurity vulnerabilities, incidents, or violations of this Law to the competent authority in good faith shall be protected from retaliation. Protection shall extend to: (a) employees of critical information system operators who report vulnerabilities or incidents to the competent authority; (b) security researchers who report vulnerabilities to operators or to CERT-Georgia through responsible disclosure procedures; (c) contractors and third-party service providers who report security deficiencies they have observed. Retaliation against whistleblowers shall be prohibited and shall constitute an offense under Georgian law. Whistleblowers who suffer retaliation shall have the right to seek remedies, including reinstatement and compensation, through the courts. The competent authority shall publish a responsible disclosure policy and shall maintain a secure channel for reporting cybersecurity vulnerabilities and incidents."
+    }
+  ],
+  "definitions": [
+    {
+      "term": "information security",
+      "definition": "The state in which the confidentiality, integrity and availability of information, information systems and related infrastructure are protected against unauthorised access, use, modification, disclosure, destruction, or damage.",
+      "source_provision": "art2"
+    },
+    {
+      "term": "critical information system",
+      "definition": "An information system whose disruption, incapacitation or destruction would have a debilitating effect on national security, national economic security, national public health or safety, or any combination thereof.",
+      "source_provision": "art2"
+    },
+    {
+      "term": "CERT-Georgia",
+      "definition": "The Computer Emergency Response Team of Georgia, established within the Digital Governance Agency, responsible for monitoring threats, coordinating incident responses, and promoting cybersecurity in Georgia.",
+      "source_provision": "art2"
+    }
+  ]
+}

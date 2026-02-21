@@ -1,0 +1,74 @@
+{
+  "id": "eu-cross-references",
+  "type": "statute",
+  "title": "ევროკავშირის ჯვარედინი მინიშნებების ინდექსი საქართველოს სამართლისთვის",
+  "title_en": "EU Cross-Reference Index for Georgian Law",
+  "short_name": "EU-XREF",
+  "status": "in_force",
+  "issued_date": "2024-01-01",
+  "in_force_date": "2024-01-01",
+  "url": "https://eur-lex.europa.eu",
+  "description": "Cross-reference index mapping Georgian national legislation to EU directives and regulations. Georgia is an EU candidate state (granted candidate status June 2024) aligning its legal framework with the EU acquis under the EU-Georgia Association Agreement and the Deep and Comprehensive Free Trade Area (DCFTA). This index tracks the alignment of Georgian law with key EU instruments in data protection, cybersecurity, electronic communications, and related fields.",
+  "provisions": [
+    {
+      "provision_ref": "xref1",
+      "section": "1",
+      "title": "GDPR Alignment",
+      "content": "Georgia aligns with the General Data Protection Regulation (EU) 2016/679 (GDPR) through the Law of Georgia on Personal Data Protection (2011, as amended 2023). The 2023 amendments significantly strengthened Georgia's data protection framework to bring it closer to GDPR standards. Areas of alignment include: data subject rights (access, rectification, erasure, portability, objection), lawful basis for processing, data protection by design and by default, and enhanced obligations for data controllers and processors. The Georgian Personal Data Protection Service (PDPS) exercises functions comparable to those of EU supervisory authorities under Article 51 GDPR. Remaining gaps include full equivalence of cross-border enforcement cooperation and the binding corporate rules mechanism. Reference: Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016 on the protection of natural persons with regard to the processing of personal data."
+    },
+    {
+      "provision_ref": "xref2",
+      "section": "2",
+      "title": "NIS2 Directive Alignment",
+      "content": "Georgia aligns with Directive (EU) 2022/2555 on measures for a high common level of cybersecurity across the Union (NIS2 Directive) through the Law of Georgia on Information Security (2012, as amended) and the Law of Georgia on Critical Information System Security. Areas of alignment include: designation of critical infrastructure sectors, incident reporting requirements, national cybersecurity strategy, and the Computer Emergency Response Team (CERT-Georgia). Full alignment requires: expansion of the scope of covered entities to match NIS2 Annex I and Annex II, strengthening of supply chain security requirements, and enhancement of cross-border incident coordination with EU member states. Georgia participates as an observer in the EU Agency for Cybersecurity (ENISA) activities under the EU-Georgia Association Agreement. Reference: Directive (EU) 2022/2555 of the European Parliament and of the Council of 14 December 2022 (NIS2)."
+    },
+    {
+      "provision_ref": "xref3",
+      "section": "3",
+      "title": "eIDAS Alignment",
+      "content": "Georgia aligns with Regulation (EU) No 910/2014 on electronic identification and trust services for electronic transactions in the internal market (eIDAS) through the Law of Georgia on Electronic Document and Electronic Trust Services (2017). Areas of alignment include: legal recognition of electronic signatures, qualified trust service providers, electronic time stamps, and electronic seals. The Georgian Accreditation Center (GAC) performs functions similar to supervisory bodies for trust services under eIDAS Article 17. Alignment with eIDAS 2 (Regulation (EU) 2024/1183) amending eIDAS to introduce the European Digital Identity Wallet framework is under review, with Georgia seeking interoperability of its national digital identity infrastructure. Reference: Regulation (EU) No 910/2014 of the European Parliament and of the Council of 23 July 2014 (eIDAS); Regulation (EU) 2024/1183 (eIDAS2)."
+    },
+    {
+      "provision_ref": "xref4",
+      "section": "4",
+      "title": "Electronic Communications Alignment",
+      "content": "Georgia aligns with the European Electronic Communications Code (Directive (EU) 2018/1972) through the Law of Georgia on Electronic Communications (2005, as comprehensively amended). Areas of alignment include: technology-neutral licensing regime, spectrum management, universal service obligations, consumer protection, and network access and interconnection. The Georgian National Communications Commission (GNCC) operates as an independent regulatory authority comparable to national regulatory authorities under the EECC. Areas requiring further alignment include: full implementation of digital connectivity targets, number portability procedures, and application of the Connectivity Toolbox recommendations. Reference: Directive (EU) 2018/1972 of the European Parliament and of the Council of 11 December 2018 establishing the European Electronic Communications Code."
+    },
+    {
+      "provision_ref": "xref5",
+      "section": "5",
+      "title": "AI Act Alignment (Preliminary)",
+      "content": "Georgia is beginning to align with Regulation (EU) 2024/1689 on Artificial Intelligence (AI Act) as part of its broader EU accession process. Georgia's preliminary alignment measures include: adoption of guidelines on the ethical use of AI in public administration, establishment of an inter-agency working group on AI governance, and participation in Council of Europe activities relating to the AI Convention (CETS 225). Full alignment with the EU AI Act will require: development of a national AI regulatory authority or designation of competent market surveillance authorities, implementation of a national register for high-risk AI systems, and adoption of implementing regulations covering prohibited AI practices, high-risk AI system requirements, and general purpose AI model obligations. Reference: Regulation (EU) 2024/1689 of the European Parliament and of the Council of 13 June 2024 on artificial intelligence (AI Act)."
+    },
+    {
+      "provision_ref": "xref6",
+      "section": "6",
+      "title": "Freedom of Information Alignment",
+      "content": "Georgia aligns with the EU Directive 2019/1024 on Open Data and the re-use of Public Sector Information (Open Data Directive) through the Law of Georgia on Freedom of Information and subsequent implementing regulations. Georgia's open data framework has been recognized as partially aligned with EU standards, with proactive publication of government datasets in machine-readable formats on the open data portal (data.gov.ge). Areas requiring further alignment include: real-time data access provisions, dynamic data requirements, and high-value dataset publication requirements of the Open Data Directive. Georgia has committed under the EU-Georgia Action Plan to fully align with the Open Data Directive as part of the acquis approximation process. Reference: Directive (EU) 2019/1024 of the European Parliament and of the Council of 20 June 2019 on Open Data and the Re-use of Public Sector Information."
+    },
+    {
+      "provision_ref": "xref7",
+      "section": "7",
+      "title": "Cybercrime Convention Alignment",
+      "content": "Georgia has ratified the Council of Europe Convention on Cybercrime (Budapest Convention, ETS 185) and the Additional Protocol on Xenophobia and Racism committed through Computer Systems (ETS 189). Georgia's criminal code provisions on cybercrime (Articles 284-286) implement the Budapest Convention requirements. Alignment with the Second Additional Protocol to the Budapest Convention on Enhanced Cooperation and Disclosure of Electronic Evidence (CETS 224) is under review. Georgia has been invited to participate in negotiations for the potential Budapest Convention Third Protocol. Georgia's cybercrime provisions are broadly compatible with the requirements of the EU Directive on attacks against information systems (Directive 2013/40/EU), which Georgia aligns with through its Criminal Code provisions. Reference: Budapest Convention ETS 185; Directive 2013/40/EU on attacks against information systems."
+    },
+    {
+      "provision_ref": "xref8",
+      "section": "8",
+      "title": "Trade Secrets Directive Alignment",
+      "content": "Georgia is aligning with Directive (EU) 2016/943 on the protection of undisclosed know-how and business information (trade secrets) against their unlawful acquisition, use and disclosure (Trade Secrets Directive). Georgia's Law on Trade Secrets provides civil protection for trade secrets, and criminal code provisions address industrial espionage. Areas of partial alignment include: the definition of trade secret aligned with Article 2(1) of the Directive, lawful and unlawful acquisition provisions, and civil remedies. Areas requiring further alignment include: explicit alignment of the exceptions for legitimate use (e.g., reverse engineering, whistleblowing), enhanced procedural protections for trade secrets in litigation, and measures to ensure consistency with trade secret protection under the Agreement on Trade-Related Aspects of Intellectual Property Rights (TRIPS). Reference: Directive (EU) 2016/943 of the European Parliament and of the Council of 8 June 2016 (Trade Secrets Directive)."
+    },
+    {
+      "provision_ref": "xref9",
+      "section": "9",
+      "title": "Digital Markets Act Preliminary Considerations",
+      "content": "Georgia is monitoring the implementation of Regulation (EU) 2022/1925 on contestable and fair markets in the digital sector (Digital Markets Act, DMA) as part of its EU accession process. As Georgia's digital economy develops and as EU-Georgia digital market integration deepens under the DCFTA, alignment with the DMA framework may become relevant. Current alignment efforts focus on: developing competition law provisions applicable to digital markets, establishing mechanisms to address dominance by large digital platforms operating in Georgia, and ensuring that Georgian users of EU digital services benefit from DMA protections. Georgia's competition authority (GNCA) has begun monitoring digital market dynamics and will develop platform regulation guidelines informed by EU DMA implementation experience. Reference: Regulation (EU) 2022/1925 of the European Parliament and of the Council of 14 September 2022 (DMA)."
+    },
+    {
+      "provision_ref": "xref10",
+      "section": "10",
+      "title": "EU-Georgia Association Agreement Digital Provisions",
+      "content": "The EU-Georgia Association Agreement (entered into force 1 July 2016) and the DCFTA include provisions requiring Georgia to progressively align with EU law in areas including electronic communications, electronic commerce, information society services, and intellectual property protection. Chapter 13 of the Association Agreement (Electronic Communications) requires Georgia to implement a regulatory framework for electronic communications compatible with the EU framework. Chapter 14 (Information Society Services) requires Georgia to implement rules on the liability of intermediaries compatible with the EU E-Commerce Directive (Directive 2000/31/EC) and its successor, the Digital Services Act (Regulation (EU) 2022/2065). Progress on alignment is monitored through the Association Council and the EU-Georgia Civil Society Platform. Reference: EU-Georgia Association Agreement OJ L 261, 30.8.2014; Regulation (EU) 2022/2065 (Digital Services Act)."
+    }
+  ]
+}

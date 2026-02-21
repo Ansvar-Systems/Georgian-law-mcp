@@ -1,0 +1,121 @@
+{
+  "id": "ge-elcomm",
+  "type": "statute",
+  "title": "ელექტრონული კომუნიკაციების შესახებ საქართველოს კანონი",
+  "title_en": "Law of Georgia on Electronic Communications",
+  "short_name": "LEC",
+  "status": "in_force",
+  "issued_date": "2005-06-02",
+  "in_force_date": "2005-07-15",
+  "url": "https://matsne.gov.ge/en/document/view/14234",
+  "description": "The Law of Georgia on Electronic Communications establishes the regulatory framework for electronic communications networks and services in Georgia. The law created the Georgian National Communications Commission (GNCC) as the independent regulatory body and opened the Georgian telecommunications market to competition. The law has been substantially amended multiple times, including amendments in 2012, 2015, and 2021 to align with the EU Electronic Communications Code (Directive (EU) 2018/1972) under Georgia's Association Agreement commitments.",
+  "provisions": [
+    {
+      "provision_ref": "art1",
+      "section": "1",
+      "title": "Article 1. Purpose and Scope",
+      "content": "The purpose of this Law is to promote the development of electronic communications networks and services in Georgia, to ensure the provision of high-quality electronic communications services to all users at affordable prices, to promote competition in the electronic communications market, and to protect the rights and interests of users. This Law shall apply to the provision of electronic communications networks and services in Georgia, to the use of the radio frequency spectrum, and to the provision of associated facilities and services. The Law is to be interpreted in accordance with the principles of the European Electronic Communications Code (Directive (EU) 2018/1972) and other EU law on electronic communications, as part of Georgia's approximation of EU legislation under the Association Agreement."
+    },
+    {
+      "provision_ref": "art2",
+      "section": "2",
+      "title": "Article 2. Definitions",
+      "content": "For the purposes of this Law: 'Electronic communications network' means transmission systems and, where applicable, switching or routing equipment and other resources that permit the conveyance of signals by wire, radio, optical or other electromagnetic means, including satellite networks, fixed and mobile terrestrial networks, electricity cable systems, and networks used for radio and television broadcasting. 'Electronic communications service' means a service normally provided for remuneration via electronic communications networks, which encompasses internet access service, interpersonal communications service, and services consisting wholly or mainly in the conveyance of signals. 'Georgian National Communications Commission (GNCC)' means the independent regulatory authority for the electronic communications sector in Georgia. 'Authorisation' means a general framework established by the GNCC giving rights to undertakings to provide electronic communications networks or services, subject to sector-specific obligations that may apply. 'Significant market power' means a position of economic strength affording an undertaking the power to behave to an appreciable extent independently of competitors, customers and ultimately consumers."
+    },
+    {
+      "provision_ref": "art3",
+      "section": "3",
+      "title": "Article 3. Georgian National Communications Commission",
+      "content": "The Georgian National Communications Commission (GNCC) shall be an independent regulatory authority for the electronic communications sector. The GNCC shall exercise the following functions: (a) issue, modify, suspend and revoke authorisations for the provision of electronic communications networks and services; (b) manage the use of the radio frequency spectrum; (c) manage the national numbering plan; (d) resolve disputes between providers of electronic communications services; (e) monitor compliance with the provisions of this Law and impose sanctions for violations; (f) promote competition in the electronic communications market; (g) ensure the protection of consumers of electronic communications services; and (h) cooperate with electronic communications regulators of EU member states and with the Body of European Regulators for Electronic Communications (BEREC). The GNCC shall operate independently and shall not be subject to direction from the Government of Georgia in the exercise of its regulatory functions."
+    },
+    {
+      "provision_ref": "art4",
+      "section": "4",
+      "title": "Article 4. Authorisation Framework",
+      "content": "The provision of electronic communications networks and services in Georgia shall be subject to the general authorisation regime established by the GNCC. Any person or entity may provide electronic communications networks or services in Georgia following notification to the GNCC, subject to compliance with the conditions of the general authorisation. The GNCC may attach conditions to general authorisations covering: (a) data protection and privacy; (b) consumer protection; (c) interoperability of services; (d) network security; (e) universal service contributions; and (f) environmental and planning requirements. The use of radio frequency spectrum shall require an individual licence from the GNCC in addition to the general authorisation. Individual licences for radio frequency use shall be awarded through competitive procedures where demand exceeds available spectrum."
+    },
+    {
+      "provision_ref": "art5",
+      "section": "5",
+      "title": "Article 5. Significant Market Power",
+      "content": "The GNCC shall undertake market analysis to identify whether any undertaking has significant market power (SMP) in any relevant market. The market analysis shall be based on the principles of EU competition law and shall be conducted in consultation with the European Commission and BEREC, as provided for under the Association Agreement. Where the GNCC finds that a provider has SMP, it shall impose one or more of the following obligations: (a) transparency obligations, requiring the SMP provider to publish specified information about prices, terms and conditions; (b) non-discrimination obligations; (c) accounting separation obligations; (d) access and interconnection obligations, requiring the SMP provider to provide access to specific network elements and associated facilities; and (e) price control obligations. SMP obligations shall be proportionate to the competition problem identified. The GNCC shall review SMP designations at regular intervals."
+    },
+    {
+      "provision_ref": "art6",
+      "section": "6",
+      "title": "Article 6. Interconnection and Access",
+      "content": "Providers of public electronic communications networks shall have the right and, when requested by other authorised undertakings, the obligation, to negotiate interconnection with each other for the purpose of providing publicly available electronic communications services. Where undertakings cannot reach an interconnection agreement within 30 days of a request, either party may refer the matter to the GNCC for resolution. The GNCC may impose access and interconnection obligations on operators with significant market power, in accordance with Article 5 of this Law. Access and interconnection agreements shall be made available to the GNCC and shall not restrict or distort competition. The GNCC may, in exceptional circumstances, impose obligations on providers without significant market power to ensure end-to-end connectivity, or to protect consumers in markets where effective competition is not expected to develop in the foreseeable future."
+    },
+    {
+      "provision_ref": "art7",
+      "section": "7",
+      "title": "Article 7. Universal Service",
+      "content": "The GNCC shall ensure that a basic set of electronic communications services of specified quality is available to all consumers within the territory of Georgia at an affordable price. Universal service obligations shall cover at minimum: (a) access to a functional internet access service and to voice communications services; (b) access to emergency services; (c) measures to ensure affordability for consumers with low incomes or special social needs. The GNCC shall designate one or more undertakings to provide universal services through a transparent, objective, non-discriminatory, and proportionate selection process. The net cost of providing universal services shall be compensated through a universal service fund or through public funds, as determined by the GNCC. The scope of universal service obligations shall be reviewed periodically to reflect changes in market conditions and consumer needs."
+    },
+    {
+      "provision_ref": "art8",
+      "section": "8",
+      "title": "Article 8. Security and Resilience",
+      "content": "Providers of electronic communications networks and services shall take appropriate technical and organisational measures to appropriately manage the risks to the security of their networks and services. These measures shall ensure a level of security of network and information systems appropriate to the risks presented. The measures shall, as a minimum, include policies on risk analysis, incident handling, business continuity management, supply chain security, network security, and the use of encryption. Providers shall notify the GNCC, without undue delay, of significant security incidents affecting their services. Where appropriate, the GNCC shall inform the public, other national authorities and competent authorities in other states of incidents. The GNCC, in coordination with the competent authority for information security, shall issue technical guidelines on network security measures, based on international standards and EU guidance. Reference: Directive (EU) 2022/2555 (NIS2) on cybersecurity obligations for digital infrastructure providers."
+    },
+    {
+      "provision_ref": "art9",
+      "section": "9",
+      "title": "Article 9. Consumer Protection",
+      "content": "Providers of electronic communications services to consumers shall: (a) publish clear and accurate information about services, prices, tariffs, and quality; (b) conclude service contracts that include specified minimum information in plain language; (c) not impose unjustified restrictions or conditions on consumers; (d) provide minimum service quality levels as specified by the GNCC; (e) operate effective and transparent complaints handling procedures; (f) not engage in misleading commercial practices; and (g) enable consumers to terminate contracts without penalty where the provider materially alters the contract terms. The GNCC shall set minimum quality standards for electronic communications services and shall monitor compliance through the collection of service quality data. The GNCC shall publish annually a report on service quality and on its enforcement activities relating to consumer protection."
+    },
+    {
+      "provision_ref": "art10",
+      "section": "10",
+      "title": "Article 10. Privacy and Confidentiality of Communications",
+      "content": "Providers of electronic communications services shall ensure the confidentiality of communications and the related traffic data. Providers shall not listen to, tap, store or otherwise intercept or monitor communications and related traffic data, unless the data subject has given consent or such interception is authorised under Georgian law. Providers shall delete or anonymise traffic data when it is no longer required for the transmission of communications, unless the data is retained for billing purposes or in accordance with a lawful retention obligation. The processing of location data other than traffic data is permitted only with the consent of the data subject or to the extent necessary to provide a value-added service, and only for the duration of the service. Lawful interception of communications by competent authorities shall be conducted only pursuant to a lawful interception order issued by a court or other competent authority, and in accordance with applicable law."
+    },
+    {
+      "provision_ref": "art11",
+      "section": "11",
+      "title": "Article 11. Radio Frequency Spectrum Management",
+      "content": "The radio frequency spectrum in Georgia is a scarce national resource managed by the GNCC in the public interest. The GNCC shall maintain and update the National Radio Frequency Plan, setting out the allocation of frequency bands for different uses. The GNCC shall assign radio frequencies through: (a) general authorisation, where individual assignment is not required to avoid harmful interference; (b) individual rights, where necessary due to the risk of harmful interference, the need to safeguard spectrum efficiency, or to achieve policy objectives. Individual rights to use radio frequencies shall be awarded through transparent, objective, proportionate and non-discriminatory procedures, including competitive or comparative selection procedures where appropriate. The GNCC shall promote the efficient use of the radio frequency spectrum and may impose conditions on spectrum rights to promote the introduction of new technologies and services."
+    },
+    {
+      "provision_ref": "art12",
+      "section": "12",
+      "title": "Article 12. Number Portability",
+      "content": "All consumers with a telephone number shall have the right to retain their number regardless of which provider delivers the service. Number portability shall be implemented and ported numbers shall be activated within one working day following the conclusion of the agreement to transfer the subscriber to a new provider. Providers shall not create incentives for consumers to retain their numbers with the same provider by, for example, imposing disproportionate charges for porting. The GNCC shall ensure that pricing for interconnection related to the provision of number portability is cost-oriented, and that direct charges to consumers, if any, are not such as to act as a disincentive for the exercise of the right to port numbers. Number portability obligations shall apply to geographic, non-geographic, and mobile telephone numbers."
+    },
+    {
+      "provision_ref": "art13",
+      "section": "13",
+      "title": "Article 13. Emergency Services",
+      "content": "All providers of electronic communications services enabling voice calls shall route all emergency calls to the appropriate emergency service, free of charge, using the single European emergency call number '112' and the Georgian emergency number '911'. Providers shall make available to emergency services the location information of calling parties to the extent technically feasible. Providers shall give priority to communications between emergency authorities and relevant communications providers during and after major disasters. The GNCC shall ensure the resilience and availability of communications to emergency services and shall publish guidelines on the technical requirements for emergency communications. Providers shall participate in national emergency exercises and shall maintain business continuity plans ensuring the availability of emergency communications services during major disasters and incidents."
+    },
+    {
+      "provision_ref": "art14",
+      "section": "14",
+      "title": "Article 14. Administrative Sanctions",
+      "content": "The GNCC may impose administrative sanctions on providers of electronic communications networks and services that violate the provisions of this Law or the conditions of their authorisations. Administrative sanctions shall include: (a) a warning; (b) an obligation to remedy the violation within a specified period; (c) a fine of up to GEL 500,000 for legal entities and up to GEL 50,000 for natural persons; and (d) suspension or revocation of the authorisation for the most serious violations. Fines shall be proportionate to the nature and duration of the violation, the size of the undertaking, and any harm caused to consumers or competitors. Decisions of the GNCC shall be subject to appeal before the administrative courts. The GNCC shall publish decisions imposing sanctions, with appropriate protection for commercially sensitive information."
+    },
+    {
+      "provision_ref": "art15",
+      "section": "15",
+      "title": "Article 15. EU Alignment",
+      "content": "This Law shall be interpreted and applied in accordance with the obligations of Georgia under the EU-Georgia Association Agreement and the Deep and Comprehensive Free Trade Area (DCFTA), including the obligation to progressively approximate Georgian law with the EU acquis in the area of electronic communications. The GNCC shall cooperate with the Body of European Regulators for Electronic Communications (BEREC) and shall take the utmost account of BEREC opinions, guidelines, and recommendations in the exercise of its regulatory functions. The GNCC shall notify the European Commission of significant regulatory measures before adopting them, in accordance with the procedures established by the Association Agreement. The provisions of this Law shall, as far as possible, be interpreted consistently with the European Electronic Communications Code (Directive (EU) 2018/1972) and related EU instruments. Reference: Directive (EU) 2018/1972 of the European Parliament and of the Council of 11 December 2018 establishing the European Electronic Communications Code."
+    }
+  ],
+  "definitions": [
+    {
+      "term": "electronic communications network",
+      "definition": "Transmission systems and, where applicable, switching or routing equipment and other resources that permit the conveyance of signals by wire, radio, optical or other electromagnetic means.",
+      "source_provision": "art2"
+    },
+    {
+      "term": "significant market power",
+      "definition": "A position of economic strength affording an undertaking the power to behave to an appreciable extent independently of competitors, customers and ultimately consumers.",
+      "source_provision": "art2"
+    },
+    {
+      "term": "GNCC",
+      "definition": "Georgian National Communications Commission, the independent regulatory authority for the electronic communications sector in Georgia.",
+      "source_provision": "art2"
+    }
+  ]
+}
