@@ -1,37 +1,22 @@
 /**
- * HTML parser for Georgian legislation from the Sejm ELI API (api.sejm.gov.pl).
+ * HTML parser for Matsne (Legislative Herald of Georgia).
  *
- * Parses the structured HTML served by the ELI text endpoint into seed JSON.
- * The HTML structure uses:
- *
- * - <div class="unit unit_chpt" id="chpt_N"> for chapters (Rozdział)
- * - <div class="unit unit_arti" id="chpt_N-arti_M"> for articles (Art.)
- * - <h3> inside articles for article number (Art. N.)
- * - <div class="unit unit_pass"> for numbered paragraphs (ustępy)
- * - <div class="unit unit_pint"> for numbered points (punkty)
- * - <div data-template="xText" class="pro-text"> for text content
- *
- * Georgian legislation references: Dz.U. YYYY poz. NNNN
- * API endpoint: https://api.sejm.gov.pl/eli/acts/DU/{YEAR}/{POZ}/text.html
+ * Parsing strategy:
+ * - Use page metadata (`og:title`, publication links, language switch links)
+ * - Parse legal text from the consolidated `#maindoc` block
+ * - Extract article headings from `p.muxlixml` ("მუხლი ...")
+ * - Accumulate following paragraph classes as the article body
  */
 
-export interface ActIndexEntry {
-  id: string;
+export interface MatsneDocumentMetadata {
+  documentId: number;
   title: string;
-  titleEn: string;
-  shortName: string;
-  status: 'in_force' | 'amended' | 'repealed' | 'not_yet_in_force';
-  issuedDate: string;
-  inForceDate: string;
-  /** ISAP display address, e.g. "Dz.U. 2018 poz. 1000" */
-  dziennikRef: string;
-  /** Year of publication in Dziennik Ustaw */
-  year: number;
-  /** Position number (poz.) in Dziennik Ustaw */
-  poz: number;
-  /** Human-readable URL on ISAP */
-  url: string;
-  description?: string;
+  issuedDate?: string;
+  authority?: string;
+  registrationCode?: string;
+  latestPublicationId?: number;
+  hasEnglishVersion: boolean;
+  canonicalUrl?: string;
 }
 
 export interface ParsedProvision {
@@ -52,397 +37,403 @@ export interface ParsedAct {
   id: string;
   type: 'statute';
   title: string;
-  title_en: string;
+  title_en?: string;
   short_name: string;
   status: 'in_force' | 'amended' | 'repealed' | 'not_yet_in_force';
-  issued_date: string;
-  in_force_date: string;
+  issued_date?: string;
+  in_force_date?: string;
   url: string;
   description?: string;
   provisions: ParsedProvision[];
   definitions: ParsedDefinition[];
 }
 
-/**
- * Strip HTML tags and decode common entities, normalising whitespace.
- */
-function stripHtml(html: string): string {
-  return html
+const HEADING_CLASSES = new Set([
+  'mimgebixml',
+  'sataurixml',
+  'satauri2',
+  'tavixml',
+  'tavisataurixml',
+  'karixml',
+  'zogadinacilixml',
+  'gansakutrebulinacilixml',
+  'muxlixml',
+  'danartixml',
+]);
+
+const CONTENT_CLASSES = new Set([
+  'abzacixml',
+  'punqtxml',
+  'qvepunqtxml',
+  'ckhrilixml',
+  'textbody',
+  'msonormal',
+  'msoplaintext',
+]);
+
+function decodeHtmlEntities(text: string): string {
+  const named: Record<string, string> = {
+    '&nbsp;': ' ',
+    '&amp;': '&',
+    '&lt;': '<',
+    '&gt;': '>',
+    '&quot;': '"',
+    '&#39;': "'",
+    '&apos;': "'",
+    '&mdash;': '—',
+    '&ndash;': '–',
+    '&minus;': '-',
+    '&bdquo;': '„',
+    '&ldquo;': '“',
+    '&rdquo;': '”',
+    '&laquo;': '«',
+    '&raquo;': '»',
+  };
+
+  let decoded = text;
+  for (const [entity, value] of Object.entries(named)) {
+    decoded = decoded.split(entity).join(value);
+  }
+
+  decoded = decoded.replace(/&#x([0-9a-fA-F]+);/g, (_, hex: string) =>
+    String.fromCodePoint(parseInt(hex, 16))
+  );
+  decoded = decoded.replace(/&#([0-9]+);/g, (_, num: string) =>
+    String.fromCodePoint(parseInt(num, 10))
+  );
+
+  return decoded;
+}
+
+function convertSupToCaret(html: string): string {
+  return html.replace(/<sup[^>]*>\s*([^<]+?)\s*<\/sup>/gi, '^$1');
+}
+
+function htmlToPlain(html: string): string {
+  const stripped = convertSupToCaret(html)
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<\/p>/gi, '\n')
     .replace(/<[^>]+>/g, ' ')
-    .replace(/&nbsp;/g, ' ')
-    .replace(/&amp;/g, '&')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'")
-    .replace(/&shy;/g, '')
-    .replace(/\u00a0/g, ' ')
-    .replace(/\s+/g, ' ')
+    .replace(/\u00a0/g, ' ');
+
+  return decodeHtmlEntities(stripped)
+    .replace(/\r/g, '')
+    .replace(/[ \t\f\v]+/g, ' ')
+    .replace(/ *\n */g, '\n')
+    .replace(/\n{3,}/g, '\n\n')
     .trim();
 }
 
-/**
- * Find the chapter heading (Rozdział) for a given article position.
- * Searches backwards from the article position for the nearest chapter div.
- */
-function findChapterHeading(html: string, articlePos: number): string | undefined {
-  const beforeArticle = html.substring(Math.max(0, articlePos - 10000), articlePos);
+function normalizeSection(section: string): string {
+  return section
+    .replace(/\s+/g, '')
+    .replace(/\^\^+/g, '^')
+    .replace(/^\^+/, '')
+    .replace(/\^+$/, '');
+}
 
-  // Look for the last chapter heading: Rozdział N ... Title
-  // Pattern in ISAP HTML: <div class="unit unit_chpt"...> <h3> Rozdział N ... Title </h3>
-  const chapterMatches = [
-    ...beforeArticle.matchAll(/Rozdzia[łl]\s*&nbsp;\s*(\d+[a-z]?)\s*(.*?)(?=<\/h3>|<\/P>)/gi),
-  ];
+function sectionToProvisionRef(section: string): string {
+  const normalized = normalizeSection(section).replace(/\^/g, '_');
+  return `art${normalized}`;
+}
 
-  if (chapterMatches.length > 0) {
-    const last = chapterMatches[chapterMatches.length - 1];
-    const chapterNum = last[1].trim();
-    // Try to find the title in subsequent <P> or <SPAN> tags
-    const afterChapter = beforeArticle.substring(last.index! + last[0].length);
-    const titleMatch = afterChapter.match(/<SPAN[^>]*class="pro-title-unit"[^>]*>(.*?)<\/SPAN>/i);
-    const title = titleMatch ? stripHtml(titleMatch[1]) : '';
+function extractArticleSection(heading: string): string | null {
+  const match = heading.match(/^მუხლი\s+([0-9]+(?:\s*(?:\^|\s)\s*[0-9]+)*)\s*(?:[.)]|$)/i);
+  if (!match) return null;
 
-    return title
-      ? `Rozdział ${chapterNum} - ${title}`
-      : `Rozdział ${chapterNum}`;
-  }
+  const numbers = match[1].match(/[0-9]+/g);
+  if (!numbers || numbers.length === 0) return null;
+  return normalizeSection(numbers.join('^'));
+}
 
-  // Also check for Dział (Division) used in larger codes
-  const dzialMatches = [
-    ...beforeArticle.matchAll(/Dzia[łl]\s*&nbsp;\s*([IVXLCDM]+[a-z]?)\s*(.*?)(?=<\/h3>|<\/P>)/gi),
-  ];
+function escapeRegExp(text: string): string {
+  return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
 
-  if (dzialMatches.length > 0) {
-    const last = dzialMatches[dzialMatches.length - 1];
-    const dzialNum = last[1].trim();
-    const afterDzial = beforeArticle.substring(last.index! + last[0].length);
-    const titleMatch = afterDzial.match(/<SPAN[^>]*class="pro-title-unit"[^>]*>(.*?)<\/SPAN>/i);
-    const title = titleMatch ? stripHtml(titleMatch[1]) : '';
+function extractBalancedTableById(html: string, tableId: string): string | undefined {
+  const tableStartRegex = new RegExp(`<table\\b[^>]*\\bid=['"]${escapeRegExp(tableId)}['"][^>]*>`, 'i');
+  const startMatch = tableStartRegex.exec(html);
+  if (!startMatch) return undefined;
 
-    return title
-      ? `Dział ${dzialNum} - ${title}`
-      : `Dział ${dzialNum}`;
+  const start = startMatch.index;
+  const tableTagRegex = /<\/?table\b[^>]*>/gi;
+  tableTagRegex.lastIndex = start;
+
+  let depth = 0;
+  let tag: RegExpExecArray | null;
+  while ((tag = tableTagRegex.exec(html)) !== null) {
+    if (/^<table\b/i.test(tag[0])) {
+      depth++;
+    } else {
+      depth--;
+      if (depth === 0) {
+        return html.slice(start, tableTagRegex.lastIndex);
+      }
+    }
   }
 
   return undefined;
 }
 
-/**
- * Parse HTML from the Sejm ELI API (api.sejm.gov.pl/eli/acts/DU/YYYY/POZ/text.html)
- * to extract provisions from a Georgian statute.
- *
- * The HTML uses div-based structure:
- *   <div class="unit unit_arti" id="chpt_N-arti_M" data-id="arti_M">
- *     <h3><B>Art. M.</B></h3>
- *     <div class="unit-inner">
- *       <div class="unit unit_pass">
- *         <h3>1.</h3>
- *         <div class="unit-inner">
- *           <div data-template="xText">...content...</div>
- *         </div>
- *       </div>
- *     </div>
- *   </div>
- */
-export function parseGeorgianHtml(html: string, act: ActIndexEntry): ParsedAct {
+function parseTableBasedProvisions(maindoc: string): {
+  provisions: ParsedProvision[];
+  definitions: ParsedDefinition[];
+} {
   const provisions: ParsedProvision[] = [];
   const definitions: ParsedDefinition[] = [];
+  const baseProvisionRefCounts = new Map<string, number>();
 
-  // Match all article divs: <div class="unit unit_arti ..." id="...-arti_N" data-id="arti_N">
-  const articleRegex = /<div[^>]*class="unit unit_arti[^"]*"[^>]*id="([^"]*-)?arti_(\d+[a-z_]*)"[^>]*data-id="arti_(\d+[a-z_]*)"[^>]*>/gi;
-  const articleStarts: { fullId: string; artNum: string; pos: number }[] = [];
+  let currentChapter: string | undefined;
+  const anchorRegex = /<a\b[^>]*\bname=['"]([^'"]+)['"][^>]*>\s*<\/a>/gi;
+  let anchorMatch: RegExpExecArray | null;
 
-  let match: RegExpExecArray | null;
-  while ((match = articleRegex.exec(html)) !== null) {
-    // Skip nested articles inside amendment provisions (chpt_12-arti_111-arti_22_2 etc.)
-    const fullId = match[0];
-    const idAttr = fullId.match(/id="([^"]+)"/)?.[1] ?? '';
-    // Count how many "arti_" segments appear in the ID
-    const artiSegments = (idAttr.match(/arti_/g) ?? []).length;
-    if (artiSegments > 1) continue;
+  while ((anchorMatch = anchorRegex.exec(maindoc)) !== null) {
+    const anchorId = anchorMatch[1];
+    const isArticleAnchor = /(?:^|;)ARTICLE:[0-9]+/i.test(anchorId);
 
-    articleStarts.push({
-      fullId: idAttr,
-      artNum: match[3],
-      pos: match.index,
-    });
-  }
+    const titleTable = extractBalancedTableById(maindoc, `${anchorId}_Title`);
+    const contentTable = extractBalancedTableById(maindoc, `${anchorId}_Content`);
+    const titleText = titleTable ? htmlToPlain(titleTable).replace(/\s+/g, ' ').trim() : '';
 
-  for (let i = 0; i < articleStarts.length; i++) {
-    const article = articleStarts[i];
-    const startPos = article.pos;
-
-    // Extract content up to next article or end
-    const endPos = i + 1 < articleStarts.length
-      ? articleStarts[i + 1].pos
-      : html.length;
-    const articleHtml = html.substring(startPos, endPos);
-
-    // Extract article number from <h3><B>Art. N.</B></h3> or <h3><B>Art. N<sup>...</B></h3>
-    const artHeadingMatch = articleHtml.match(
-      /<h3[^>]*>\s*<B[^>]*>\s*Art\.?\s*&nbsp;?\s*(\d+[a-z]*)\b/i
-    );
-
-    const artNum = artHeadingMatch
-      ? artHeadingMatch[1].trim()
-      : article.artNum.replace(/_/g, '');
-
-    // Normalize: remove underscores from article numbers like "22_2"
-    const normalizedNum = artNum.replace(/_/g, '');
-    const provisionRef = `art${normalizedNum}`;
-
-    // Find chapter heading
-    const chapter = findChapterHeading(html, startPos);
-
-    // Extract text content, stripping HTML
-    // Remove the article heading to avoid duplication
-    const contentHtml = articleHtml
-      .replace(/<h3[^>]*>\s*<B[^>]*>\s*Art\.?\s*&nbsp;?\s*\d+[a-z]*\.?\s*<\/B>\s*<\/h3>/i, '');
-    let content = stripHtml(contentHtml);
-
-    // Skip very short articles (likely just structural markers)
-    if (content.length < 5) continue;
-
-    // Cap content at 12K characters
-    if (content.length > 12000) {
-      content = content.substring(0, 12000);
+    if (!isArticleAnchor && /(?:^|;)(?:BOOK|PART|CHAPTER|SECTION|TITLE):/i.test(anchorId)) {
+      if (titleText) currentChapter = titleText;
+      continue;
     }
 
-    // Build a title from the first sentence or paragraph if meaningful
-    const title = `Art. ${normalizedNum}`;
+    if (!isArticleAnchor) continue;
+    if (!titleText) continue;
+
+    const heading =
+      titleText
+        .split('\n')
+        .map(line => line.replace(/\s+/g, ' ').trim())
+        .find(line => /^მუხლი\b/i.test(line)) ??
+      titleText.match(/მუხლი[\s\S]*$/i)?.[0]?.replace(/\s+/g, ' ').trim();
+
+    if (!heading) continue;
+
+    const section = extractArticleSection(heading);
+    if (!section) continue;
+
+    const baseProvisionRef = sectionToProvisionRef(section);
+    const currentCount = baseProvisionRefCounts.get(baseProvisionRef) ?? 0;
+    const provisionRef =
+      currentCount === 0 ? baseProvisionRef : `${baseProvisionRef}_dup${currentCount + 1}`;
+    baseProvisionRefCounts.set(baseProvisionRef, currentCount + 1);
+
+    const content = contentTable ? htmlToPlain(contentTable) : '';
+    if (!content) continue;
 
     provisions.push({
       provision_ref: provisionRef,
-      chapter,
-      section: normalizedNum,
-      title,
+      chapter: currentChapter,
+      section,
+      title: heading,
       content,
     });
 
-    // Extract definitions from definition articles
-    // Georgian acts use "ilekroć mowa" (whenever mentioned), "rozumie się przez to"
-    // (this is understood as), or "oznacza" (means)
-    if (
-      content.includes('ilekro') ||
-      content.includes('rozumie si') ||
-      content.includes('oznacza') ||
-      content.includes('nale') && content.includes('rozumie')
-    ) {
-      extractDefinitions(content, provisionRef, definitions);
+    if (/ტერმინ|განმარტებ/i.test(heading)) {
+      for (const def of extractDefinitions(content, provisionRef)) {
+        definitions.push(def);
+      }
     }
   }
 
+  return { provisions, definitions };
+}
+
+function extractMaidocHtml(html: string): string {
+  const start = html.indexOf('<div class="document" id="maindoc">');
+  if (start === -1) return html;
+
+  const end = html.indexOf('</body>', start);
+  if (end === -1) return html.slice(start);
+
+  return html.slice(start, end);
+}
+
+export function parseMatsneMetadata(html: string, documentId: number): MatsneDocumentMetadata {
+  const title =
+    html.match(/<meta property="og:title" content="([^"]+)"/i)?.[1]?.trim() ?? `Document ${documentId}`;
+
+  const issuedDateRaw =
+    html.match(/title="მიღების თარიღი">([^<]+)<\/div>/i)?.[1]?.trim() ??
+    html.match(/title="Дата принятия">([^<]+)<\/div>/i)?.[1]?.trim();
+  let issuedDate: string | undefined;
+  if (issuedDateRaw && /^\d{2}\/\d{2}\/\d{4}$/.test(issuedDateRaw)) {
+    const [dd, mm, yyyy] = issuedDateRaw.split('/');
+    issuedDate = `${yyyy}-${mm}-${dd}`;
+  }
+
+  const authority = html.match(/title="დოკუმენტის მიმღები">([^<]+)<\/div>/i)?.[1]?.trim();
+  const registrationCode = html.match(/title="სარეგისტრაციო კოდი">([^<]+)<\/div>/i)?.[1]?.trim();
+  const canonicalUrl = html.match(/<link rel="canonical" href="([^"]+)"/i)?.[1];
+
+  const publicationIds = [...html.matchAll(/\?publication=(\d+)/g)].map(m => Number(m[1]));
+  const latestPublicationId = publicationIds.length > 0 ? Math.max(...publicationIds) : undefined;
+
+  const hasEnglishVersion = /matsne-language-switcher[\s\S]*value="en"/i.test(html);
+
   return {
-    id: act.id,
-    type: 'statute',
-    title: act.title,
-    title_en: act.titleEn,
-    short_name: act.shortName,
-    status: act.status,
-    issued_date: act.issuedDate,
-    in_force_date: act.inForceDate,
-    url: act.url,
-    description: act.description,
-    provisions,
-    definitions,
+    documentId,
+    title: decodeHtmlEntities(title),
+    issuedDate,
+    authority: authority ? decodeHtmlEntities(authority) : undefined,
+    registrationCode,
+    latestPublicationId,
+    hasEnglishVersion,
+    canonicalUrl,
   };
 }
 
-/**
- * Extract definitions from Georgian legal text.
- *
- * Georgian definitions typically use patterns like:
- *   - "«term» – oznacza ..." ("term" – means ...)
- *   - "N) term – ..." (numbered list of definitions)
- *   - "ilekroć ... mowa o «term» – rozumie się przez to ..."
- */
-function extractDefinitions(
-  text: string,
-  sourceProvision: string,
-  definitions: ParsedDefinition[],
-): void {
-  // Pattern: numbered definitions like "1) term - definition;"
-  const numberedDefRegex = /\d+\)\s+([^–\-]+?)\s+[–\-]\s+(.*?)(?=;\s*\d+\)|$)/g;
-  let defMatch: RegExpExecArray | null;
+export function parseMatsneEnglishTitle(html: string): string | undefined {
+  if (/Access Denied|Oops! Something went wrong/i.test(html)) return undefined;
 
-  while ((defMatch = numberedDefRegex.exec(text)) !== null) {
-    const term = defMatch[1].trim();
-    const definition = defMatch[2].replace(/;$/, '').trim();
-
-    if (term.length > 1 && term.length < 100 && definition.length > 5) {
-      definitions.push({
-        term,
-        definition,
-        source_provision: sourceProvision,
-      });
-    }
-  }
-
-  // Pattern: «quoted term» – definition
-  const quotedDefRegex = /[„«\u201e]([^"»\u201d]+)["\u201d»]\s*[–\-]\s*(.*?)(?=[;.]\s*[„«\u201e]|[;.]\s*$)/g;
-  while ((defMatch = quotedDefRegex.exec(text)) !== null) {
-    const term = defMatch[1].trim();
-    const definition = defMatch[2].replace(/[;.]$/, '').trim();
-
-    if (term.length > 1 && term.length < 100 && definition.length > 5) {
-      definitions.push({
-        term,
-        definition,
-        source_provision: sourceProvision,
-      });
-    }
-  }
+  const title = html.match(/<meta property="og:title" content="([^"]+)"/i)?.[1]?.trim();
+  if (!title) return undefined;
+  return decodeHtmlEntities(title);
 }
 
-/**
- * Pre-configured list of key Georgian Acts to ingest.
- *
- * Source: api.sejm.gov.pl (Sejm ELI API)
- * URL pattern: https://api.sejm.gov.pl/eli/acts/DU/{YEAR}/{POZ}/text.html
- *
- * These are the most important Georgian statutes for cybersecurity, data protection,
- * and compliance use cases. References use the Dziennik Ustaw (Journal of Laws)
- * format: Dz.U. YYYY poz. NNNN.
- */
-export const KEY_GEORGIAN_ACTS: ActIndexEntry[] = [
-  {
-    id: 'dpa-2018',
-    title: 'Ustawa z dnia 10 maja 2018 r. o ochronie danych osobowych',
-    titleEn: 'Personal Data Protection Act 2018',
-    shortName: 'UODO 2018',
-    status: 'in_force',
-    issuedDate: '2018-05-10',
-    inForceDate: '2018-05-25',
-    dziennikRef: 'Dz.U. 2018 poz. 1000',
-    year: 2018,
-    poz: 1000,
-    url: 'https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20180001000',
-    description: 'GDPR implementing provisions (RODO); establishes UODO (Urząd Ochrony Danych Osobowych) as the supervisory authority; covers certification, codes of conduct, and administrative penalties',
-  },
-  {
-    id: 'ksc-2018',
-    title: 'Ustawa z dnia 5 lipca 2018 r. o krajowym systemie cyberbezpieczeństwa',
-    titleEn: 'National Cybersecurity System Act 2018 (KSC)',
-    shortName: 'KSC',
-    status: 'in_force',
-    issuedDate: '2018-07-05',
-    inForceDate: '2018-08-28',
-    dziennikRef: 'Dz.U. 2018 poz. 1560',
-    year: 2018,
-    poz: 1560,
-    url: 'https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20180001560',
-    description: 'NIS Directive implementation; establishes national cybersecurity system with CSIRT teams (CSIRT NASK, CSIRT GOV, CSIRT MON); covers essential services operators and digital service providers',
-  },
-  {
-    id: 'ksh-2000',
-    title: 'Ustawa z dnia 15 września 2000 r. - Kodeks spółek handlowych',
-    titleEn: 'Commercial Companies Code (KSH)',
-    shortName: 'KSH',
-    status: 'in_force',
-    issuedDate: '2000-09-15',
-    inForceDate: '2001-01-01',
-    dziennikRef: 'Dz.U. 2000 nr 94 poz. 1037',
-    year: 2000,
-    poz: 1037,
-    url: 'https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20000940037',
-    description: 'Comprehensive commercial companies law governing partnerships (spółka jawna, komandytowa, etc.) and capital companies (sp. z o.o. and S.A.); corporate governance requirements',
-  },
-  {
-    id: 'kodeks-karny-1997',
-    title: 'Ustawa z dnia 6 czerwca 1997 r. - Kodeks karny',
-    titleEn: 'Criminal Code (Kodeks karny)',
-    shortName: 'KK',
-    status: 'in_force',
-    issuedDate: '1997-06-06',
-    inForceDate: '1998-09-01',
-    dziennikRef: 'Dz.U. 1997 nr 88 poz. 553',
-    year: 1997,
-    poz: 553,
-    url: 'https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU19970880553',
-    description: 'Criminal Code; cybercrime provisions in Art. 267 (unauthorized access), Art. 268 (data destruction), Art. 268a (computer sabotage), Art. 269 (sabotage of critical systems), Art. 269a (DoS), Art. 269b (hacking tools)',
-  },
-  {
-    id: 'e-services-2002',
-    title: 'Ustawa z dnia 18 lipca 2002 r. o świadczeniu usług drogą elektroniczną',
-    titleEn: 'Act on Provision of Electronic Services',
-    shortName: 'E-Services Act',
-    status: 'in_force',
-    issuedDate: '2002-07-18',
-    inForceDate: '2002-10-10',
-    dziennikRef: 'Dz.U. 2002 nr 144 poz. 1204',
-    year: 2002,
-    poz: 1204,
-    url: 'https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20021441204',
-    description: 'E-Commerce Directive implementation; regulates electronic services, ISP liability, spam prohibition, electronic contracts',
-  },
-  {
-    id: 'telecom-2004',
-    title: 'Ustawa z dnia 16 lipca 2004 r. - Prawo telekomunikacyjne',
-    titleEn: 'Telecommunications Law',
-    shortName: 'PT',
-    status: 'in_force',
-    issuedDate: '2004-07-16',
-    inForceDate: '2004-09-03',
-    dziennikRef: 'Dz.U. 2004 nr 171 poz. 1800',
-    year: 2004,
-    poz: 1800,
-    url: 'https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20041711800',
-    description: 'Telecommunications regulation; data retention, communications security, network integrity obligations, UKE (Office of Electronic Communications) authority',
-  },
-  {
-    id: 'constitution-1997',
-    title: 'Konstytucja Rzeczypospolitej Polskiej z dnia 2 kwietnia 1997 r.',
-    titleEn: 'Constitution of the Republic of Poland',
-    shortName: 'Konstytucja RP',
-    status: 'in_force',
-    issuedDate: '1997-04-02',
-    inForceDate: '1997-10-17',
-    dziennikRef: 'Dz.U. 1997 nr 78 poz. 483',
-    year: 1997,
-    poz: 483,
-    url: 'https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU19970780483',
-    description: 'Supreme law; Art. 47 (privacy), Art. 49 (communication secrecy), Art. 51 (personal data protection), Art. 54 (freedom of expression)',
-  },
-  {
-    id: 'kodeks-cywilny-1964',
-    title: 'Ustawa z dnia 23 kwietnia 1964 r. - Kodeks cywilny',
-    titleEn: 'Civil Code (Kodeks cywilny)',
-    shortName: 'KC',
-    status: 'in_force',
-    issuedDate: '1964-04-23',
-    inForceDate: '1965-01-01',
-    dziennikRef: 'Dz.U. 1964 nr 16 poz. 93',
-    year: 1964,
-    poz: 93,
-    url: 'https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU19640160093',
-    description: 'Core private law; personality rights protection (Art. 23-24), contract law, liability for damages, electronic declarations of intent',
-  },
-  {
-    id: 'banking-law-1997',
-    title: 'Ustawa z dnia 29 sierpnia 1997 r. - Prawo bankowe',
-    titleEn: 'Banking Law',
-    shortName: 'PB',
-    status: 'in_force',
-    issuedDate: '1997-08-29',
-    inForceDate: '1998-01-01',
-    dziennikRef: 'Dz.U. 1997 nr 140 poz. 939',
-    year: 1997,
-    poz: 939,
-    url: 'https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU19971400939',
-    description: 'Banking regulation; banking secrecy obligations, outsourcing of banking activities, IT security requirements for banks, cloud computing provisions',
-  },
-  {
-    id: 'kpa-1960',
-    title: 'Ustawa z dnia 14 czerwca 1960 r. - Kodeks postępowania administracyjnego',
-    titleEn: 'Code of Administrative Procedure (KPA)',
-    shortName: 'KPA',
-    status: 'in_force',
-    issuedDate: '1960-06-14',
-    inForceDate: '1961-01-01',
-    dziennikRef: 'Dz.U. 1960 nr 30 poz. 168',
-    year: 1960,
-    poz: 168,
-    url: 'https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU19600300168',
-    description: 'Administrative procedure code; governs proceedings before UODO (data protection authority), UKE, and other regulators; electronic administration provisions',
-  },
-];
+export function parseMatsneProvisions(html: string): {
+  provisions: ParsedProvision[];
+  definitions: ParsedDefinition[];
+} {
+  const maindoc = extractMaidocHtml(html);
+  const paragraphRegex = /<p([^>]*)>([\s\S]*?)<\/p>/gi;
+
+  const provisions: ParsedProvision[] = [];
+  const definitions: ParsedDefinition[] = [];
+  const baseProvisionRefCounts = new Map<string, number>();
+
+  let currentChapter: string | undefined;
+  let currentProvision:
+    | {
+        section: string;
+        title: string;
+        chapter?: string;
+        contentParts: string[];
+      }
+    | null = null;
+
+  const finishProvision = (): void => {
+    if (!currentProvision) return;
+
+    const content = currentProvision.contentParts.join('\n').replace(/\n{3,}/g, '\n\n').trim();
+    if (content.length > 0) {
+      const section = normalizeSection(currentProvision.section);
+      const baseProvisionRef = sectionToProvisionRef(section);
+      const currentCount = baseProvisionRefCounts.get(baseProvisionRef) ?? 0;
+      const provisionRef =
+        currentCount === 0 ? baseProvisionRef : `${baseProvisionRef}_dup${currentCount + 1}`;
+      baseProvisionRefCounts.set(baseProvisionRef, currentCount + 1);
+      provisions.push({
+        provision_ref: provisionRef,
+        chapter: currentProvision.chapter,
+        section,
+        title: currentProvision.title,
+        content,
+      });
+
+      // Definition extraction is intentionally conservative to avoid noisy synthetic terms.
+      if (/ტერმინ|განმარტებ/i.test(currentProvision.title)) {
+        for (const def of extractDefinitions(content, provisionRef)) {
+          definitions.push(def);
+        }
+      }
+    }
+
+    currentProvision = null;
+  };
+
+  let match: RegExpExecArray | null;
+  while ((match = paragraphRegex.exec(maindoc)) !== null) {
+    const attrs = match[1] ?? '';
+    const classNameRaw = attrs.match(/\bclass="([^"]+)"/i)?.[1] ?? '';
+    const classTokens = classNameRaw
+      .toLowerCase()
+      .split(/\s+/)
+      .map(c => c.trim())
+      .filter(Boolean);
+    const innerHtml = match[2];
+    const text = htmlToPlain(innerHtml);
+
+    if (!text) continue;
+
+    const heading = text.replace(/\s+/g, ' ').trim();
+    const section = extractArticleSection(heading);
+    if (section) {
+      finishProvision();
+
+      currentProvision = {
+        section,
+        title: heading,
+        chapter: currentChapter,
+        contentParts: [],
+      };
+      continue;
+    }
+
+    if (
+      classTokens.some(c => c.includes('tavixml') || c.includes('karixml') || c.includes('tavisataurixml')) ||
+      /^თავი\b/i.test(text) ||
+      /^კარი\b/i.test(text)
+    ) {
+      currentChapter = text.replace(/\s+/g, ' ').trim();
+      continue;
+    }
+
+    if (!currentProvision) continue;
+
+    const isBodyParagraph =
+      classTokens.some(c => CONTENT_CLASSES.has(c)) ||
+      (classTokens.length === 0 && text.length > 0) ||
+      classTokens.some(c => !HEADING_CLASSES.has(c) && c.endsWith('xml'));
+
+    if (!isBodyParagraph) continue;
+
+    currentProvision.contentParts.push(text);
+  }
+
+  finishProvision();
+
+  if (provisions.length === 0) {
+    const tableBased = parseTableBasedProvisions(maindoc);
+    if (tableBased.provisions.length > 0) {
+      return tableBased;
+    }
+  }
+
+  return { provisions, definitions };
+}
+
+function extractDefinitions(content: string, sourceProvision: string): ParsedDefinition[] {
+  const defs: ParsedDefinition[] = [];
+
+  const seen = new Set<string>();
+  const pushDef = (term: string, definition: string): void => {
+    const t = term.trim();
+    const d = definition.trim();
+    if (t.length < 2 || d.length < 8 || t.length > 120 || d.length > 2000) return;
+
+    const key = `${t}::${d}`;
+    if (seen.has(key)) return;
+    seen.add(key);
+    defs.push({ term: t, definition: d, source_provision: sourceProvision });
+  };
+
+  // Example: „ტერმინი“ - განმარტება
+  const quotedPattern = /[„«]([^“»]+)[“»]\s*[-–—]\s*([^;\n]+(?:;|$))/g;
+  let qMatch: RegExpExecArray | null;
+  while ((qMatch = quotedPattern.exec(content)) !== null) {
+    pushDef(qMatch[1], qMatch[2].replace(/[;.]$/, '').trim());
+  }
+
+  // Example: ა) ტერმინი - განმარტება
+  const linePattern = /(?:^|\n)\s*[ა-ჰA-Za-z0-9]+[\)\.]?\s+([^-\n]{2,120})\s*[-–—]\s*([^\n]{8,})/g;
+  let lMatch: RegExpExecArray | null;
+  while ((lMatch = linePattern.exec(content)) !== null) {
+    pushDef(lMatch[1], lMatch[2].replace(/[;.]$/, '').trim());
+  }
+
+  return defs;
+}

@@ -1,186 +1,323 @@
 #!/usr/bin/env tsx
 /**
- * Georgian Law MCP -- Ingestion Pipeline
+ * Georgian Law MCP -- Real ingestion from matsne.gov.ge
  *
- * Fetches Georgian legislation from the Sejm ELI API (api.sejm.gov.pl).
- * The Sejm (Georgian Parliament) provides free public access to all legislation
- * published in Dziennik Ustaw (Journal of Laws) via the ELI API.
+ * Corpus strategy:
+ * - Active code corpus from /ka/active-codes
+ * - Top legal documents from /ka/top
+ * - Explicitly added key acts (PDP, information security, etc.)
  *
- * Strategy:
- * 1. For each act, fetch the HTML text from the ELI API endpoint
- * 2. Parse articles (Art.) from the structured HTML
- * 3. Write seed JSON files for the database builder
- *
- * Usage:
- *   npm run ingest                    # Full ingestion
- *   npm run ingest -- --limit 5       # Test with 5 acts
- *   npm run ingest -- --skip-fetch    # Reuse cached pages
- *
- * Data source: api.sejm.gov.pl (Chancellery of the Sejm of the Republic of Poland)
- * License: Georgian legislation is public domain under Art. 4 of the Copyright Act
+ * If a document is blocked/inaccessible, it is skipped and logged.
+ * No synthetic fallback text is generated.
  */
 
 import * as fs from 'fs';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
 import { fetchWithRateLimit } from './lib/fetcher.js';
-import { parseGeorgianHtml, KEY_GEORGIAN_ACTS, type ActIndexEntry, type ParsedAct } from './lib/parser.js';
+import {
+  parseMatsneEnglishTitle,
+  parseMatsneMetadata,
+  parseMatsneProvisions,
+  type ParsedAct,
+} from './lib/parser.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const SOURCE_DIR = path.resolve(__dirname, '../data/source');
 const SEED_DIR = path.resolve(__dirname, '../data/seed');
+const REPORT_PATH = path.resolve(__dirname, '../data/ingestion-report.json');
 
-/** ELI API base URL for the Sejm */
-const ELI_API_BASE = 'https://api.sejm.gov.pl/eli/acts/DU';
+const MATSNE_BASE = 'https://www.matsne.gov.ge';
+const KA_VIEW = `${MATSNE_BASE}/ka/document/view`;
 
-function parseArgs(): { limit: number | null; skipFetch: boolean } {
+const LISTING_URLS = [
+  `${MATSNE_BASE}/ka/active-codes`,
+  `${MATSNE_BASE}/ka/top`,
+];
+
+const EXTRA_DOCUMENT_IDS = [
+  1561437, // პერსონალურ მონაცემთა დაცვის შესახებ
+  1679424, // ინფორმაციული უსაფრთხოების შესახებ
+  16270, // ზოგადი ადმინისტრაციული კოდექსი
+  16426, // სისხლის სამართლის კოდექსი
+];
+
+const FRIENDLY_IDS: Record<number, string> = {
+  1561437: 'ge-personal-data-protection',
+  1679424: 'ge-information-security',
+  16270: 'ge-general-administrative-code',
+  16426: 'ge-criminal-code',
+  90034: 'ge-criminal-procedure-code',
+  31702: 'ge-civil-code',
+  29962: 'ge-civil-procedure-code',
+  28216: 'ge-administrative-offences-code',
+  30346: 'ge-constitution',
+};
+
+interface IngestResult {
+  documentId: number;
+  status: 'ingested' | 'skipped';
+  reason?: string;
+  seedId?: string;
+  url?: string;
+  title?: string;
+  provisions?: number;
+  definitions?: number;
+}
+
+function parseArgs(): { limit: number | null } {
   const args = process.argv.slice(2);
   let limit: number | null = null;
-  let skipFetch = false;
 
   for (let i = 0; i < args.length; i++) {
     if (args[i] === '--limit' && args[i + 1]) {
       limit = parseInt(args[i + 1], 10);
       i++;
-    } else if (args[i] === '--skip-fetch') {
-      skipFetch = true;
     }
   }
 
-  return { limit, skipFetch };
+  return { limit };
 }
 
-/**
- * Build the ELI API URL for fetching an act's HTML text.
- * Pattern: https://api.sejm.gov.pl/eli/acts/DU/{YEAR}/{POZ}/text.html
- */
-function buildTextUrl(act: ActIndexEntry): string {
-  return `${ELI_API_BASE}/${act.year}/${act.poz}/text.html`;
+function extractDocumentIds(html: string): number[] {
+  const ids = [...html.matchAll(/\/ka\/document\/view\/(\d+)/g)].map(m => Number(m[1]));
+  return Array.from(new Set(ids)).filter(Number.isFinite);
 }
 
-async function fetchAndParseActs(acts: ActIndexEntry[], skipFetch: boolean): Promise<void> {
-  console.log(`\nProcessing ${acts.length} Georgian Acts from api.sejm.gov.pl...\n`);
+function makeDocumentSeedId(documentId: number): string {
+  return FRIENDLY_IDS[documentId] ?? `ge-doc-${documentId}`;
+}
 
-  fs.mkdirSync(SOURCE_DIR, { recursive: true });
+function makeShortName(title: string, documentId: number): string {
+  if (/კოდექსი/.test(title)) {
+    return `კოდექსი-${documentId}`;
+  }
+  if (/კანონი/.test(title)) {
+    return `კანონი-${documentId}`;
+  }
+  return `DOC-${documentId}`;
+}
+
+function cleanSeedDir(): void {
   fs.mkdirSync(SEED_DIR, { recursive: true });
+  const existing = fs.readdirSync(SEED_DIR).filter(f => f.endsWith('.json'));
+  for (const file of existing) {
+    fs.unlinkSync(path.join(SEED_DIR, file));
+  }
+}
 
-  let processed = 0;
-  let skipped = 0;
-  let failed = 0;
-  let totalProvisions = 0;
-  let totalDefinitions = 0;
-  const results: { act: string; provisions: number; definitions: number; status: string }[] = [];
+function safeTitleEn(kaTitle: string, enTitle?: string): string | undefined {
+  if (!enTitle) return undefined;
+  const normalizedKa = kaTitle.trim();
+  const normalizedEn = enTitle.trim();
+  if (!normalizedEn || normalizedEn === normalizedKa) return undefined;
+  return normalizedEn;
+}
 
-  for (const act of acts) {
-    const sourceFile = path.join(SOURCE_DIR, `${act.id}.html`);
-    const seedFile = path.join(SEED_DIR, `${act.id}.json`);
+function buildDocumentUrl(documentId: number, publicationId?: number): string {
+  if (!publicationId) return `${KA_VIEW}/${documentId}`;
+  return `${KA_VIEW}/${documentId}?publication=${publicationId}`;
+}
 
-    // Skip if seed already exists and we're in skip-fetch mode
-    if (skipFetch && fs.existsSync(seedFile)) {
-      const existing = JSON.parse(fs.readFileSync(seedFile, 'utf-8')) as ParsedAct;
-      const provCount = existing.provisions?.length ?? 0;
-      const defCount = existing.definitions?.length ?? 0;
-      totalProvisions += provCount;
-      totalDefinitions += defCount;
-      results.push({ act: act.shortName, provisions: provCount, definitions: defCount, status: 'cached' });
-      skipped++;
-      processed++;
+async function fetchListingDocumentIds(): Promise<number[]> {
+  const allIds: number[] = [];
+
+  for (const url of LISTING_URLS) {
+    const response = await fetchWithRateLimit(url);
+    if (response.blocked || response.status !== 200) {
+      console.warn(`  Listing unavailable: ${url} (status ${response.status})`);
       continue;
     }
-
-    try {
-      let html: string;
-
-      if (fs.existsSync(sourceFile) && skipFetch) {
-        html = fs.readFileSync(sourceFile, 'utf-8');
-        console.log(`  Using cached ${act.shortName} (${act.dziennikRef}) (${(html.length / 1024).toFixed(0)} KB)`);
-      } else {
-        const textUrl = buildTextUrl(act);
-        process.stdout.write(`  Fetching ${act.shortName} (${act.dziennikRef})...`);
-        const result = await fetchWithRateLimit(textUrl);
-
-        if (result.status !== 200) {
-          console.log(` HTTP ${result.status}`);
-          results.push({ act: act.shortName, provisions: 0, definitions: 0, status: `HTTP ${result.status}` });
-          failed++;
-          processed++;
-          continue;
-        }
-
-        html = result.body;
-
-        // Validate that we got real legislation content, not a bot challenge
-        if (html.includes('window["bobcmn"]') || !html.includes('unit_arti')) {
-          console.log(` BLOCKED (bot challenge or no article content)`);
-          results.push({ act: act.shortName, provisions: 0, definitions: 0, status: 'BLOCKED' });
-          failed++;
-          processed++;
-          continue;
-        }
-
-        fs.writeFileSync(sourceFile, html);
-        console.log(` OK (${(html.length / 1024).toFixed(0)} KB)`);
-      }
-
-      const parsed = parseGeorgianHtml(html, act);
-      fs.writeFileSync(seedFile, JSON.stringify(parsed, null, 2));
-      totalProvisions += parsed.provisions.length;
-      totalDefinitions += parsed.definitions.length;
-      console.log(`    -> ${parsed.provisions.length} provisions, ${parsed.definitions.length} definitions extracted`);
-      results.push({
-        act: act.shortName,
-        provisions: parsed.provisions.length,
-        definitions: parsed.definitions.length,
-        status: 'OK',
-      });
-    } catch (error) {
-      const msg = error instanceof Error ? error.message : String(error);
-      console.log(`  ERROR ${act.shortName}: ${msg}`);
-      results.push({ act: act.shortName, provisions: 0, definitions: 0, status: `ERROR: ${msg.substring(0, 80)}` });
-      failed++;
-    }
-
-    processed++;
+    allIds.push(...extractDocumentIds(response.body));
   }
 
-  console.log(`\n${'='.repeat(72)}`);
-  console.log('Ingestion Report');
-  console.log('='.repeat(72));
-  console.log(`\n  Source:       api.sejm.gov.pl (Sejm ELI API)`);
-  console.log(`  License:     Public domain (Art. 4 Georgian Copyright Act)`);
-  console.log(`  Processed:   ${processed}`);
-  console.log(`  Cached:      ${skipped}`);
-  console.log(`  Failed:      ${failed}`);
-  console.log(`  Total provisions:  ${totalProvisions}`);
-  console.log(`  Total definitions: ${totalDefinitions}`);
-  console.log(`\n  Per-Act breakdown:`);
-  console.log(`  ${'Act'.padEnd(20)} ${'Provisions'.padStart(12)} ${'Definitions'.padStart(13)} ${'Status'.padStart(10)}`);
-  console.log(`  ${'-'.repeat(20)} ${'-'.repeat(12)} ${'-'.repeat(13)} ${'-'.repeat(10)}`);
-  for (const r of results) {
-    console.log(`  ${r.act.padEnd(20)} ${String(r.provisions).padStart(12)} ${String(r.definitions).padStart(13)} ${r.status.padStart(10)}`);
+  return Array.from(new Set(allIds));
+}
+
+async function fetchEnglishTitle(documentId: number, publicationId?: number): Promise<string | undefined> {
+  const enUrl = buildDocumentUrl(documentId, publicationId).replace('/ka/', '/en/');
+  try {
+    const response = await fetchWithRateLimit(enUrl);
+    if (response.blocked || response.status !== 200) return undefined;
+    return parseMatsneEnglishTitle(response.body);
+  } catch {
+    return undefined;
   }
-  console.log('');
+}
+
+async function ingestDocument(documentId: number): Promise<{ result: IngestResult; seed?: ParsedAct }> {
+  const baseUrl = buildDocumentUrl(documentId);
+  const metaResponse = await fetchWithRateLimit(baseUrl);
+
+  if (metaResponse.blocked) {
+    return {
+      result: {
+        documentId,
+        status: 'skipped',
+        reason: `blocked${metaResponse.blockReferenceId ? ` (Ref ID ${metaResponse.blockReferenceId})` : ''}`,
+      },
+    };
+  }
+  if (metaResponse.status !== 200) {
+    return {
+      result: {
+        documentId,
+        status: 'skipped',
+        reason: `HTTP ${metaResponse.status}`,
+      },
+    };
+  }
+
+  const meta = parseMatsneMetadata(metaResponse.body, documentId);
+  const publicationId = meta.latestPublicationId;
+  const finalUrl = buildDocumentUrl(documentId, publicationId);
+
+  const pageResponse =
+    finalUrl === baseUrl ? metaResponse : await fetchWithRateLimit(finalUrl);
+  if (pageResponse.blocked) {
+    return {
+      result: {
+        documentId,
+        status: 'skipped',
+        reason: `blocked on publication page${pageResponse.blockReferenceId ? ` (Ref ID ${pageResponse.blockReferenceId})` : ''}`,
+      },
+    };
+  }
+  if (pageResponse.status !== 200) {
+    return {
+      result: {
+        documentId,
+        status: 'skipped',
+        reason: `HTTP ${pageResponse.status} on publication page`,
+      },
+    };
+  }
+
+  const parsed = parseMatsneProvisions(pageResponse.body);
+  if (parsed.provisions.length === 0) {
+    return {
+      result: {
+        documentId,
+        status: 'skipped',
+        reason: 'no provisions parsed',
+      },
+    };
+  }
+
+  const titleEn = meta.hasEnglishVersion
+    ? safeTitleEn(meta.title, await fetchEnglishTitle(documentId, publicationId))
+    : undefined;
+
+  const seed: ParsedAct = {
+    id: makeDocumentSeedId(documentId),
+    type: 'statute',
+    title: meta.title,
+    title_en: titleEn,
+    short_name: makeShortName(meta.title, documentId),
+    status: 'in_force',
+    issued_date: meta.issuedDate,
+    in_force_date: meta.issuedDate,
+    url: finalUrl,
+    description: 'Official consolidated legislation text published by the Legislative Herald of Georgia (matsne.gov.ge).',
+    provisions: parsed.provisions,
+    definitions: parsed.definitions,
+  };
+
+  return {
+    result: {
+      documentId,
+      status: 'ingested',
+      seedId: seed.id,
+      title: seed.title,
+      url: seed.url,
+      provisions: seed.provisions.length,
+      definitions: seed.definitions.length,
+    },
+    seed,
+  };
 }
 
 async function main(): Promise<void> {
-  const { limit, skipFetch } = parseArgs();
+  const { limit } = parseArgs();
 
-  console.log('Georgian Law MCP -- Ingestion Pipeline');
-  console.log('====================================\n');
-  console.log(`  Source: api.sejm.gov.pl (Chancellery of the Sejm)`);
-  console.log(`  Format: ELI HTML (structured legislation text)`);
-  console.log(`  License: Public domain (Art. 4 Georgian Copyright Act)`);
+  console.log('Georgian Law MCP -- Real Matsne ingestion');
+  console.log('=========================================');
+  console.log(`Source listings: ${LISTING_URLS.join(', ')}`);
+  if (limit) console.log(`Limit: ${limit}`);
+  console.log('');
 
-  if (limit) console.log(`  --limit ${limit}`);
-  if (skipFetch) console.log(`  --skip-fetch`);
+  const listingIds = await fetchListingDocumentIds();
+  const candidateIds = Array.from(new Set([...listingIds, ...EXTRA_DOCUMENT_IDS])).sort((a, b) => a - b);
+  const selectedIds = limit ? candidateIds.slice(0, limit) : candidateIds;
 
-  const acts = limit ? KEY_GEORGIAN_ACTS.slice(0, limit) : KEY_GEORGIAN_ACTS;
-  await fetchAndParseActs(acts, skipFetch);
+  console.log(`Discovered ${listingIds.length} listing IDs; ingesting ${selectedIds.length} documents total.`);
+  console.log('');
+
+  cleanSeedDir();
+
+  const results: IngestResult[] = [];
+  const seeds: ParsedAct[] = [];
+
+  for (let i = 0; i < selectedIds.length; i++) {
+    const id = selectedIds[i];
+    process.stdout.write(`[${String(i + 1).padStart(2, '0')}/${selectedIds.length}] ${id} ... `);
+
+    try {
+      const { result, seed } = await ingestDocument(id);
+      results.push(result);
+
+      if (seed) {
+        seeds.push(seed);
+        console.log(`OK (${seed.provisions.length} provisions, ${seed.definitions.length} definitions)`);
+      } else {
+        console.log(`SKIP (${result.reason})`);
+      }
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      results.push({ documentId: id, status: 'skipped', reason: message });
+      console.log(`SKIP (${message})`);
+    }
+  }
+
+  // Deterministic ordering by seed id.
+  seeds.sort((a, b) => a.id.localeCompare(b.id));
+  const pad = Math.max(2, String(seeds.length).length);
+
+  for (let i = 0; i < seeds.length; i++) {
+    const fileName = `${String(i + 1).padStart(pad, '0')}-${seeds[i].id}.json`;
+    fs.writeFileSync(path.join(SEED_DIR, fileName), `${JSON.stringify(seeds[i], null, 2)}\n`);
+  }
+
+  const ingested = results.filter(r => r.status === 'ingested');
+  const skipped = results.filter(r => r.status === 'skipped');
+
+  const report = {
+    generated_at: new Date().toISOString(),
+    source: 'https://www.matsne.gov.ge',
+    listing_urls: LISTING_URLS,
+    discovered_listing_ids: listingIds.length,
+    selected_ids: selectedIds.length,
+    ingested_documents: ingested.length,
+    skipped_documents: skipped.length,
+    total_provisions: ingested.reduce((sum, r) => sum + (r.provisions ?? 0), 0),
+    total_definitions: ingested.reduce((sum, r) => sum + (r.definitions ?? 0), 0),
+    skipped_reasons: skipped,
+  };
+
+  fs.writeFileSync(REPORT_PATH, `${JSON.stringify(report, null, 2)}\n`);
+
+  console.log('\nIngestion summary');
+  console.log('-----------------');
+  console.log(`Ingested: ${ingested.length}`);
+  console.log(`Skipped:  ${skipped.length}`);
+  console.log(`Seeds:    ${seeds.length}`);
+  console.log(`Output:   ${SEED_DIR}`);
+  console.log(`Report:   ${REPORT_PATH}`);
 }
 
 main().catch(error => {
-  console.error('Fatal error:', error);
+  console.error('Fatal ingestion error:', error);
   process.exit(1);
 });
+

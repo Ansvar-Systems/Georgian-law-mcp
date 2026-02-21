@@ -1,0 +1,15 @@
+{
+  "generated_at": "2026-02-21T20:51:15.625Z",
+  "source": "https://www.matsne.gov.ge",
+  "listing_urls": [
+    "https://www.matsne.gov.ge/ka/active-codes",
+    "https://www.matsne.gov.ge/ka/top"
+  ],
+  "discovered_listing_ids": 27,
+  "selected_ids": 30,
+  "ingested_documents": 30,
+  "skipped_documents": 0,
+  "total_provisions": 6399,
+  "total_definitions": 827,
+  "skipped_reasons": []
+}
