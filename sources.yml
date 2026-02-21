@@ -9,15 +9,17 @@ sources:
     retrieval_method: "HTML_SCRAPE"
     update_frequency: "weekly"
     last_ingested: "2026-02-21"
+    access_status: "blocked_in_runtime_environment"
     license_or_terms:
-      type: "Government Open Data"
+      type: "government_terms"
       url: "https://matsne.gov.ge"
-      summary: "Official legislative texts are public domain"
+      summary: "Official legislation portal terms apply; usage is public-facing but automated access is currently blocked in this runtime environment."
     coverage:
       scope: "Data protection, cybersecurity, e-commerce, criminal law cyber provisions"
-      limitations: "AI-generated seed data; full official ingestion pending"
+      limitations: "Current MCP seed corpus is AI-generated synthetic text. Direct automated retrieval from matsne.gov.ge returns WAF Access Denied responses in this environment, preventing real ingestion."
     languages:
       - "ka"
+      - "en"
 
 data_freshness:
   automated_checks: true
