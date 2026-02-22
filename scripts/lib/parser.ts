@@ -138,7 +138,7 @@ function sectionToProvisionRef(section: string): string {
 }
 
 function extractArticleSection(heading: string): string | null {
-  const match = heading.match(/^მუხლი\s+([0-9]+(?:\s*(?:\^|\s)\s*[0-9]+)*)\s*(?:[.)]|$)/i);
+  const match = heading.match(/^[„"«]?\s*მუხლი\s+([0-9]+(?:\s*(?:\^|\s)\s*[0-9]+)*)\s*(?:[.)]|$)/i);
   if (!match) return null;
 
   const numbers = match[1].match(/[0-9]+/g);
@@ -146,8 +146,233 @@ function extractArticleSection(heading: string): string | null {
   return normalizeSection(numbers.join('^'));
 }
 
+function isLikelyUiNoiseLine(text: string): boolean {
+  const compact = text.replace(/\s+/g, ' ').trim();
+  if (!compact) return true;
+
+  if (
+    /^(?:-+|{{{partTitle}}})$/i.test(compact) ||
+    /^(?:დოკუმენტის სტრუქტურა|განმარტებების დათვალიერება|დაკავშირებული დოკუმენტები|დოკუმენტის კომენტარები|დოკუმენტის მონიშვნები)$/i.test(compact) ||
+    /^(?:კონსოლიდირებული ვერსია \(საბოლოო\)|კონსოლიდირებული პუბლიკაციები)$/i.test(compact) ||
+    /^(?:სსიპ .+ საკანონმდებლო მაცნე|დამუშავებულია AzRy)/i.test(compact) ||
+    /^(?:უზენაესი სასამართლოს განმარტებები|ბმულები)$/i.test(compact)
+  ) {
+    return true;
+  }
+
+  return false;
+}
+
+function isLikelyDownloadOnlyHint(text: string): boolean {
+  return /დოკუმენტის სანახავად.*გადმოწერ/i.test(text);
+}
+
+function parseFallbackSingleProvision(maindoc: string): {
+  provisions: ParsedProvision[];
+  definitions: ParsedDefinition[];
+} {
+  const paragraphRegex = /<p([^>]*)>([\s\S]*?)<\/p>/gi;
+  const lines: string[] = [];
+  let sawDownloadOnlyHint = false;
+  let sawLegalSignal = false;
+
+  let match: RegExpExecArray | null;
+  while ((match = paragraphRegex.exec(maindoc)) !== null) {
+    const text = htmlToPlain(match[2]);
+    if (!text) continue;
+
+    const line = text.replace(/\s+/g, ' ').trim();
+    if (!line) continue;
+
+    if (isLikelyDownloadOnlyHint(line)) {
+      sawDownloadOnlyHint = true;
+      continue;
+    }
+
+    if (isLikelyUiNoiseLine(line)) continue;
+
+    if (
+      /(?:კანონი|კოდექსი|დადგენილებ|ბრძანებ|დეკრეტი|ადგენს|თავი|კარი|განყოფილება|მუხლი)/i.test(line) ||
+      /^[0-9]+[.)]\s+\S/.test(line) ||
+      /^[IVXLCDM]+\.\s+\S/i.test(line)
+    ) {
+      sawLegalSignal = true;
+    }
+
+    lines.push(line);
+  }
+
+  if (lines.length === 0) {
+    return { provisions: [], definitions: [] };
+  }
+
+  const content = lines.join('\n').replace(/\n{3,}/g, '\n\n').trim();
+  if (!content) {
+    return { provisions: [], definitions: [] };
+  }
+
+  // Guard: keep true PDF/download-only placeholders as skipped.
+  if (sawDownloadOnlyHint && lines.length <= 2 && content.length < 400) {
+    return { provisions: [], definitions: [] };
+  }
+
+  // Guard: avoid ingesting accidental UI fragments when no legal signal exists.
+  if (!sawLegalSignal && content.length < 300) {
+    return { provisions: [], definitions: [] };
+  }
+
+  const title =
+    lines.find(line => /(?:კანონი|კოდექსი|დადგენილებ|ბრძანებ|დეკრეტი|აქტი)/i.test(line)) ??
+    lines[0];
+
+  return {
+    provisions: [
+      {
+        provision_ref: 'art1',
+        section: '1',
+        title: title.slice(0, 240),
+        content,
+      },
+    ],
+    definitions: [],
+  };
+}
+
+export function parseMatsneProvisionsFromPlainText(text: string): {
+  provisions: ParsedProvision[];
+  definitions: ParsedDefinition[];
+} {
+  const lines = text
+    .replace(/\uFEFF/g, '')
+    .replace(/\r/g, '')
+    .split('\n')
+    .map(line => line.replace(/\s+/g, ' ').trim())
+    .filter(Boolean);
+
+  if (lines.length === 0) {
+    return { provisions: [], definitions: [] };
+  }
+
+  const provisions: ParsedProvision[] = [];
+  const definitions: ParsedDefinition[] = [];
+  const baseProvisionRefCounts = new Map<string, number>();
+
+  let currentChapter: string | undefined;
+  let currentProvision:
+    | {
+        section: string;
+        title: string;
+        chapter?: string;
+        contentParts: string[];
+      }
+    | null = null;
+
+  const finishProvision = (): void => {
+    if (!currentProvision) return;
+
+    const content = currentProvision.contentParts.join('\n').replace(/\n{3,}/g, '\n\n').trim();
+    if (content.length > 0) {
+      const section = normalizeSection(currentProvision.section);
+      const baseProvisionRef = sectionToProvisionRef(section);
+      const currentCount = baseProvisionRefCounts.get(baseProvisionRef) ?? 0;
+      const provisionRef =
+        currentCount === 0 ? baseProvisionRef : `${baseProvisionRef}_dup${currentCount + 1}`;
+      baseProvisionRefCounts.set(baseProvisionRef, currentCount + 1);
+
+      provisions.push({
+        provision_ref: provisionRef,
+        chapter: currentProvision.chapter,
+        section,
+        title: currentProvision.title,
+        content,
+      });
+
+      if (/ტერმინ|განმარტებ/i.test(currentProvision.title)) {
+        for (const def of extractDefinitions(content, provisionRef)) {
+          definitions.push(def);
+        }
+      }
+    }
+
+    currentProvision = null;
+  };
+
+  for (const line of lines) {
+    if (isLikelyUiNoiseLine(line)) continue;
+
+    const section = extractArticleSection(line);
+    if (section) {
+      finishProvision();
+      currentProvision = {
+        section,
+        title: line,
+        chapter: currentChapter,
+        contentParts: [],
+      };
+      continue;
+    }
+
+    if (/^(?:წიგნი|ნაწილი|კარი|თავი|განყოფილება)\b/i.test(line)) {
+      currentChapter = line;
+      continue;
+    }
+
+    if (!currentProvision) continue;
+    currentProvision.contentParts.push(line);
+  }
+
+  finishProvision();
+
+  if (provisions.length > 0) {
+    return { provisions, definitions };
+  }
+
+  const content = lines.join('\n').replace(/\n{3,}/g, '\n\n').trim();
+  if (!content || content.length < 200) {
+    return { provisions: [], definitions: [] };
+  }
+
+  const title = lines.find(line => /(?:კანონი|კოდექსი|დადგენილებ|ბრძანებ|დეკრეტი|აქტი)/i.test(line)) ?? lines[0];
+  return {
+    provisions: [
+      {
+        provision_ref: 'art1',
+        section: '1',
+        title: title.slice(0, 240),
+        content,
+      },
+    ],
+    definitions: [],
+  };
+}
+
 function escapeRegExp(text: string): string {
   return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function extractBalancedDivById(html: string, divId: string): string | undefined {
+  const divStartRegex = new RegExp(`<div\\b[^>]*\\bid=['"]${escapeRegExp(divId)}['"][^>]*>`, 'i');
+  const startMatch = divStartRegex.exec(html);
+  if (!startMatch) return undefined;
+
+  const start = startMatch.index;
+  const divTagRegex = /<\/?div\b[^>]*>/gi;
+  divTagRegex.lastIndex = start;
+
+  let depth = 0;
+  let tag: RegExpExecArray | null;
+  while ((tag = divTagRegex.exec(html)) !== null) {
+    if (/^<div\b/i.test(tag[0])) {
+      depth++;
+    } else {
+      depth--;
+      if (depth === 0) {
+        return html.slice(start, divTagRegex.lastIndex);
+      }
+    }
+  }
+
+  return html.slice(start);
 }
 
 function extractBalancedTableById(html: string, tableId: string): string | undefined {
@@ -243,13 +468,7 @@ function parseTableBasedProvisions(maindoc: string): {
 }
 
 function extractMaidocHtml(html: string): string {
-  const start = html.indexOf('<div class="document" id="maindoc">');
-  if (start === -1) return html;
-
-  const end = html.indexOf('</body>', start);
-  if (end === -1) return html.slice(start);
-
-  return html.slice(start, end);
+  return extractBalancedDivById(html, 'maindoc') ?? html;
 }
 
 export function parseMatsneMetadata(html: string, documentId: number): MatsneDocumentMetadata {
@@ -400,6 +619,11 @@ export function parseMatsneProvisions(html: string): {
     const tableBased = parseTableBasedProvisions(maindoc);
     if (tableBased.provisions.length > 0) {
       return tableBased;
+    }
+
+    const fallback = parseFallbackSingleProvision(maindoc);
+    if (fallback.provisions.length > 0) {
+      return fallback;
     }
   }
 

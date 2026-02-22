@@ -1,15 +1,26 @@
 {
-  "generated_at": "2026-02-21T20:51:15.625Z",
+  "generated_at": "2026-02-22T05:19:49.102Z",
   "source": "https://www.matsne.gov.ge",
-  "listing_urls": [
-    "https://www.matsne.gov.ge/ka/active-codes",
-    "https://www.matsne.gov.ge/ka/top"
-  ],
-  "discovered_listing_ids": 27,
-  "selected_ids": 30,
-  "ingested_documents": 30,
+  "mode": "full-laws",
+  "discovery": {
+    "strategy": "search",
+    "search_profile": "full-laws",
+    "search_params": {
+      "type": "main",
+      "additional_status": "normative",
+      "group": "1000003",
+      "sort": "signingDate_desc",
+      "limit": "100"
+    },
+    "search_total_results": 943,
+    "search_pages_fetched": 10,
+    "search_last_page": 10
+  },
+  "selected_ids": 943,
+  "ingested_documents": 4,
   "skipped_documents": 0,
-  "total_provisions": 6399,
-  "total_definitions": 827,
+  "already_present_documents": 939,
+  "total_provisions": 114,
+  "total_definitions": 24,
   "skipped_reasons": []
 }
