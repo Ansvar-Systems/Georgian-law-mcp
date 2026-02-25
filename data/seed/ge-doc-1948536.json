@@ -1,0 +1,38 @@
+{
+  "id": "ge-doc-1948536",
+  "type": "statute",
+  "title": "სახელმწიფო აუდიტის სამსახურის შინაგანაწესის დამტკიცების შესახებ",
+  "short_name": "DOC-1948536",
+  "status": "in_force",
+  "issued_date": "2013-06-18",
+  "in_force_date": "2013-06-18",
+  "url": "https://www.matsne.gov.ge/ka/document/view/1948536?publication=3",
+  "description": "Official consolidated legislation text published by the Legislative Herald of Georgia (matsne.gov.ge).",
+  "provisions": [
+    {
+      "provision_ref": "art1",
+      "section": "1",
+      "title": "მუხლი 1",
+      "content": "დამტკიცდეს სახელმწიფო აუდიტის სამსახურის შინაგანაწესი თანდართული სახით."
+    },
+    {
+      "provision_ref": "art2",
+      "section": "2",
+      "title": "მუხლი 2",
+      "content": "სახელმწიფო აუდიტის სამსახურის შინაგანაწესი განთავსდეს სამსახურის ადმინისტრაციულ შენობებში სპეციალურად გამოყოფილ თვალსაჩინო ადგილას, საჯაროდ გაცნობისათვის."
+    },
+    {
+      "provision_ref": "art3",
+      "section": "3",
+      "title": "მუხლი 3",
+      "content": "ეს ბრძანება ამოქმედდეს გამოქვეყნებისთანავე."
+    },
+    {
+      "provision_ref": "art9",
+      "section": "9",
+      "title": "მუხლი 9. ხელფასის გაცემის დრო და ადგილი",
+      "content": "სამსახურში ხელფასი გაიცემა თვეში ერთხელ (ყოველი თვის მესამე დეკადაში), რომელიც მოსამსახურეს ერიცხება უნაღდო ანგარიშსწორების ფორმით, სპეციალურ საბანკო ანგარიშზე."
+    }
+  ],
+  "definitions": []
+}

@@ -1,0 +1,26 @@
+{
+  "id": "ge-doc-2432646",
+  "type": "statute",
+  "title": "ჩოხატაურის მუნიციპალიტეტის ადმინისტრაციული ერთეულების შექმნის შესახებ",
+  "short_name": "DOC-2432646",
+  "status": "in_force",
+  "issued_date": "2014-07-31",
+  "in_force_date": "2014-07-31",
+  "url": "https://www.matsne.gov.ge/ka/document/view/2432646?publication=1",
+  "description": "Official consolidated legislation text published by the Legislative Herald of Georgia (matsne.gov.ge).",
+  "provisions": [
+    {
+      "provision_ref": "art1",
+      "section": "1",
+      "title": "მუხლი 1",
+      "content": "შეიქმნას ჩოხატაურის მუნიციპალიტეტის ადმინისტრაციული ერთეულები (დანართი თან ერთვის)."
+    },
+    {
+      "provision_ref": "art2",
+      "section": "2",
+      "title": "მუხლი 2",
+      "content": "დადგენილება ამოქმედდეს გამოქვეყნებისთანავე."
+    }
+  ],
+  "definitions": []
+}

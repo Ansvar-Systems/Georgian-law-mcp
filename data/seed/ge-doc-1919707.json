@@ -1,0 +1,26 @@
+{
+  "id": "ge-doc-1919707",
+  "type": "statute",
+  "title": "საჯარო სამართლის იურიდიული პირის - ნავთობისა და გაზის სახელმწიფო სააგენტოს დებულების დამტკიცების შესახებ",
+  "short_name": "DOC-1919707",
+  "status": "in_force",
+  "issued_date": "2013-05-13",
+  "in_force_date": "2013-05-13",
+  "url": "https://www.matsne.gov.ge/ka/document/view/1919707?publication=5",
+  "description": "Official consolidated legislation text published by the Legislative Herald of Georgia (matsne.gov.ge).",
+  "provisions": [
+    {
+      "provision_ref": "art14",
+      "section": "14",
+      "title": "მუხლი 14. სააგენტოს რეორგანიზაცია და ლიკვიდაცია",
+      "content": "სააგენტოს რეორგანიზაცია ან ლიკვიდაცია ხორციელდება საქართველოს კანონმდებლობით დადგენილი წესით."
+    },
+    {
+      "provision_ref": "art15",
+      "section": "15",
+      "title": "მუხლი 15. სააგენტოს დებულებაში ცვლილებებისა და დამატებების შეტანის წესი",
+      "content": "სააგენტოს დებულებაში ცვლილებებისა და დამატებების შეტანა ხორციელდება საქართველოს კანონმდებლობით დადგენილი წესით."
+    }
+  ],
+  "definitions": []
+}

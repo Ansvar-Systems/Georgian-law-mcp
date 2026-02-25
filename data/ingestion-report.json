@@ -1,26 +1,25 @@
 {
-  "generated_at": "2026-02-22T05:19:49.102Z",
+  "generated_at": "2026-02-22T05:37:26.720Z",
   "source": "https://www.matsne.gov.ge",
-  "mode": "full-laws",
+  "mode": "full-main-normative",
   "discovery": {
     "strategy": "search",
-    "search_profile": "full-laws",
+    "search_profile": "full-main-normative",
     "search_params": {
       "type": "main",
       "additional_status": "normative",
-      "group": "1000003",
       "sort": "signingDate_desc",
       "limit": "100"
     },
-    "search_total_results": 943,
-    "search_pages_fetched": 10,
-    "search_last_page": 10
+    "search_total_results": 51350,
+    "search_pages_fetched": 1,
+    "search_last_page": 514
   },
-  "selected_ids": 943,
-  "ingested_documents": 4,
+  "selected_ids": 1,
+  "ingested_documents": 1,
   "skipped_documents": 0,
-  "already_present_documents": 939,
-  "total_provisions": 114,
-  "total_definitions": 24,
+  "already_present_documents": 0,
+  "total_provisions": 16,
+  "total_definitions": 0,
   "skipped_reasons": []
 }

@@ -1,0 +1,26 @@
+{
+  "id": "ge-doc-1416572",
+  "type": "statute",
+  "title": "ელექტროენერგიის გატარების ტარიფების შესახებ",
+  "short_name": "DOC-1416572",
+  "status": "in_force",
+  "issued_date": "2007-07-06",
+  "in_force_date": "2007-07-06",
+  "url": "https://www.matsne.gov.ge/ka/document/view/1416572?publication=2",
+  "description": "Official consolidated legislation text published by the Legislative Herald of Georgia (matsne.gov.ge).",
+  "provisions": [
+    {
+      "provision_ref": "art1",
+      "section": "1",
+      "title": "მუხლი 1. დამტკიცდეს გამანაწილებელი კომპანიების (გარდა სს ,,თელასისა“ და სს ,,კახეთის ენერგოდისტრიბუციისა“) მიერ ელექტროენერგიის გატარების ტარიფები კვალიფიციური საწარმოებისათვის ძაბვების მიხედვით, შემდეგი ოდენობით:",
+      "content": "№\nძაბვა\nთეთრი/კვტსთ დღგ-ის გარეშე\n1.\n35 –110 კილოვოლტი\n0,206\n2.\n6 –10 კილოვოლტი\n0,580\n3.\n220/380 ვოლტი\n1,320"
+    },
+    {
+      "provision_ref": "art4",
+      "section": "4",
+      "title": "მუხლი 4. დადგენილება ძალაშია გამოქვეყნებიდან 15 დღის შემდეგ.",
+      "content": "თავმჯდომარე გ. თავაძე"
+    }
+  ],
+  "definitions": []
+}

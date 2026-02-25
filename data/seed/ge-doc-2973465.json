@@ -1,0 +1,26 @@
+{
+  "id": "ge-doc-2973465",
+  "type": "statute",
+  "title": "ინფორმაციის კონფიდენციალურად მიჩნევის, მისი გაცემის და კონფიდენციალური ინფორმაციის ნუსხის დამტკიცების წესის შესახებ",
+  "short_name": "DOC-2973465",
+  "status": "in_force",
+  "issued_date": "2015-09-08",
+  "in_force_date": "2015-09-08",
+  "url": "https://www.matsne.gov.ge/ka/document/view/2973465?publication=1",
+  "description": "Official consolidated legislation text published by the Legislative Herald of Georgia (matsne.gov.ge).",
+  "provisions": [
+    {
+      "provision_ref": "art1",
+      "section": "1",
+      "title": "მუხლი 1",
+      "content": "დამტკიცდეს:\n\nა) ინფორმაციის კონფიდენციალურად მიჩნევის და კონფიდენციალურად მიჩნეული ინფორმაციის გაცემის წესი;\n\nბ) კონფიდენციალური ინფორმაციის ნუსხა (დანართი №1)."
+    },
+    {
+      "provision_ref": "art2",
+      "section": "2",
+      "title": "მუხლი 2",
+      "content": "ეს ბრძანება ამოქმედდეს გამოქვეყნებისთანავე."
+    }
+  ],
+  "definitions": []
+}

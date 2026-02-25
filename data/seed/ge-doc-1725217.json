@@ -1,0 +1,38 @@
+{
+  "id": "ge-doc-1725217",
+  "type": "statute",
+  "title": "ბოლნისის მუნიციპალიტეტის გამგეობის ჯანმრთელობის დაცვის სამსახურის დებულების დამტკიცების შესახებ",
+  "short_name": "DOC-1725217",
+  "status": "in_force",
+  "issued_date": "2012-08-14",
+  "in_force_date": "2012-08-14",
+  "url": "https://www.matsne.gov.ge/ka/document/view/1725217?publication=1",
+  "description": "Official consolidated legislation text published by the Legislative Herald of Georgia (matsne.gov.ge).",
+  "provisions": [
+    {
+      "provision_ref": "art1",
+      "section": "1",
+      "title": "მუხლი 1",
+      "content": "დამტკიცდეს ბოლნისის მუნიციპალიტეტის გამგეობის ჯანმრთელობის დაცვის სამსახურის დებულება (დანართი №1)."
+    },
+    {
+      "provision_ref": "art2",
+      "section": "2",
+      "title": "მუხლი 2",
+      "content": "დადგენილება ამოქმედდეს გამოქვეყნებისთანავე."
+    },
+    {
+      "provision_ref": "art3",
+      "section": "3",
+      "title": "მუხლი 3. სამსახურის სამუშაო ენა",
+      "content": "სამსახურის საქმის წარმოება ხორციელდება ქართულ ენაზე."
+    },
+    {
+      "provision_ref": "art4",
+      "section": "4",
+      "title": "მუხლი 4. სამსახურის ადგილსამყოფელი",
+      "content": "სამსახურის ადგილსამყოფელია ქ.ბოლნისი სულხან-საბა ორბელიანის ქ №106."
+    }
+  ],
+  "definitions": []
+}

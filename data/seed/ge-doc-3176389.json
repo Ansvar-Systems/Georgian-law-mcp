@@ -1,0 +1,32 @@
+{
+  "id": "ge-doc-3176389",
+  "type": "statute",
+  "title": "ტექნიკური რეგლამენტის „შენობა-ნაგებობის უსაფრთხოების წესების“ დამტკიცების თაობაზე",
+  "short_name": "DOC-3176389",
+  "status": "in_force",
+  "issued_date": "2016-01-28",
+  "in_force_date": "2016-01-28",
+  "url": "https://www.matsne.gov.ge/ka/document/view/3176389?publication=19",
+  "description": "Official consolidated legislation text published by the Legislative Herald of Georgia (matsne.gov.ge).",
+  "provisions": [
+    {
+      "provision_ref": "art1",
+      "section": "1",
+      "title": "მუხლი 1",
+      "content": "პროდუქტის უსაფრთხოებისა და თავისუფალი მიმოქცევის კოდექსის 103-ე მუხლის შესაბამისად, დამტკიცდეს თანდართული ტექნიკური რეგლამენტი - „შენობა-ნაგებობის უსაფრთხოების წესები“."
+    },
+    {
+      "provision_ref": "art2",
+      "section": "2",
+      "title": "მუხლი 2",
+      "content": "ამ დადგენილების მოქმედება ვრცელდება მხოლოდ კანონმდებლობის შესაბამისად განსაზღვრულ III, IV და V კლასს დაქვემდებარებული შენობებისა და ნაგებობების დაგეგმარებაზე, მშენებლობასა და მოვლა-პატრონობაზე."
+    },
+    {
+      "provision_ref": "art3",
+      "section": "3",
+      "title": "მუხლი 3",
+      "content": "დადგენილება ამოქმედდეს 2017 წლის 1 იანვრიდან."
+    }
+  ],
+  "definitions": []
+}

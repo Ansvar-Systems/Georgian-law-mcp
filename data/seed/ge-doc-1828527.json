@@ -1,0 +1,54 @@
+{
+  "id": "ge-doc-1828527",
+  "type": "statute",
+  "title": "დედოფლისწყაროს მუნიციპალიტეტის გამგეობაში სტაჟირების გავლის წესის დამტკიცების შესახებ",
+  "short_name": "DOC-1828527",
+  "status": "in_force",
+  "issued_date": "2013-01-25",
+  "in_force_date": "2013-01-25",
+  "url": "https://www.matsne.gov.ge/ka/document/view/1828527?publication=1",
+  "description": "Official consolidated legislation text published by the Legislative Herald of Georgia (matsne.gov.ge).",
+  "provisions": [
+    {
+      "provision_ref": "art1",
+      "section": "1",
+      "title": "მუხლი 1",
+      "content": "დამტკიცდეს დედოფლისწყაროს მუნიციპალიტეტის გამგეობაში სტაჟირების გავლის\n\nწესი თანდართული დანართის შესაბამისად."
+    },
+    {
+      "provision_ref": "art2",
+      "section": "2",
+      "title": "მუხლი 2",
+      "content": "დადგენილება ამოქმედდეს გამოქვეყნებისთანავე."
+    },
+    {
+      "provision_ref": "art2_dup2",
+      "chapter": "თავი I ზოგადი დებულებანი",
+      "section": "2",
+      "title": "მუხლი 2",
+      "content": "ამ წესში გამოყენებულ ტერმინებს აქვთ შემდეგი მნიშვნელობა:"
+    },
+    {
+      "provision_ref": "art3",
+      "chapter": "თავი II სტაჟიორის სტატუსი",
+      "section": "3",
+      "title": "მუხლი 3",
+      "content": "დედოფლისწყაროს მუნიციპალიტეტის გამგეობაში სტაჟირების გავლის მსურველი კანდიდატი უნდა აკმაყოფილებდეს შემდეგ მოთხოვნებს:"
+    },
+    {
+      "provision_ref": "art5",
+      "chapter": "თავი II სტაჟიორის სტატუსი",
+      "section": "5",
+      "title": "მუხლი 5",
+      "content": "სტაჟიორს უფლება აქვს:"
+    },
+    {
+      "provision_ref": "art6",
+      "chapter": "თავი II სტაჟიორის სტატუსი",
+      "section": "6",
+      "title": "მუხლი 6",
+      "content": "სტაჟიორი ვალდებულია:"
+    }
+  ],
+  "definitions": []
+}

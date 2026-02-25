@@ -1,0 +1,4 @@
+
+> @ansvar/georgian-law-mcp@1.0.0 ingest
+> node --import tsx scripts/ingest.ts --mode full-main-normative --resume --skip-english --quiet
+

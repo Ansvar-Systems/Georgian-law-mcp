@@ -1,0 +1,33 @@
+{
+  "id": "ge-doc-3173181",
+  "type": "statute",
+  "title": "ხობის მუნიციპალიტეტის დასახლების საერთო კრების ტიპური დებულების დამტკიცების შესახებ",
+  "short_name": "DOC-3173181",
+  "status": "in_force",
+  "issued_date": "2016-01-28",
+  "in_force_date": "2016-01-28",
+  "url": "https://www.matsne.gov.ge/ka/document/view/3173181",
+  "description": "Official consolidated legislation text published by the Legislative Herald of Georgia (matsne.gov.ge).",
+  "provisions": [
+    {
+      "provision_ref": "art1",
+      "section": "1",
+      "title": "მუხლი 1",
+      "content": "დამტკიცდეს თანდართული ხობის მუნიციპალიტეტის დასახლების საერთო კრების ტიპური დებულება."
+    },
+    {
+      "provision_ref": "art3",
+      "section": "3",
+      "title": "მუხლი 3",
+      "content": "დადგენილება ამოქმედდეს 2016 წლის 1 მარტიდან."
+    },
+    {
+      "provision_ref": "art5",
+      "chapter": "თავი II საერთო კრების სტრუქტურა, უფლებამოსილებები, მოწვევის და საქმიანობის წესი",
+      "section": "5",
+      "title": "მუხლი 5. საერთო კრების გადაწყვეტილება",
+      "content": "საერთო კრებაზე საკითხის განხილვის შედეგად მიღებული წინადადება, შენიშვნა, რეკომენდაცია საერთო კრების გადაწყვეტილების სახით ფორმდება საერთო კრების ოქმით (შემდგომში - „ოქმი“)."
+    }
+  ],
+  "definitions": []
+}

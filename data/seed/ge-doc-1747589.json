@@ -1,0 +1,26 @@
+{
+  "id": "ge-doc-1747589",
+  "type": "statute",
+  "title": "საარჩევნო პროცედურის განსაზღვრის თაობაზე",
+  "short_name": "DOC-1747589",
+  "status": "in_force",
+  "issued_date": "2012-09-21",
+  "in_force_date": "2012-09-21",
+  "url": "https://www.matsne.gov.ge/ka/document/view/1747589?publication=2",
+  "description": "Official consolidated legislation text published by the Legislative Herald of Georgia (matsne.gov.ge).",
+  "provisions": [
+    {
+      "provision_ref": "art1",
+      "section": "1",
+      "title": "მუხლი 1. ამომრჩეველი კენჭისყრაში მონაწილეობს თუ:",
+      "content": "საქართველოს მოქალაქის პირადობის დამადასტურებელ დოკუმენტში მითითებულ პირად ნომერთან ერთად, სრულად ემთხვევა „საქართველოს საარჩევნო კოდექსი” საქართველოს ორგანული კანონის 31-ე მუხლის მე-2 პუნქტით განსაზღვრულ შემდეგ მონაცემთაგან 3 მაინც:\nა) სახელი;\nბ) გვარი;\nგ) დაბადების თარიღი (რიცხვი, თვე, წელი);\nდ) მისამართი."
+    },
+    {
+      "provision_ref": "art3",
+      "section": "3",
+      "title": "მუხლი 3. ეს დადგენილება ამოქმედდეს გამოქვეყნებისთანავე.",
+      "content": "კომისიის თავმჯდომარე ზ. ხარატიშვილი\nკომისიის მდივანი გ. მჭედლიძე"
+    }
+  ],
+  "definitions": []
+}

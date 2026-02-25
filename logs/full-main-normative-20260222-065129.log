@@ -1,0 +1,19 @@
+
+> @ansvar/georgian-law-mcp@1.0.0 ingest
+> node --import tsx scripts/ingest.ts --mode full-main-normative --resume --skip-english --quiet
+
+Georgian Law MCP -- Real Matsne ingestion
+=========================================
+Mode: full-main-normative
+Resume mode: enabled (existing seed files are reused)
+English titles: skipped (--skip-english)
+
+Search-discovered 51350 document IDs; ingesting 51350 documents.
+
+[00150/51350] processed, ingested=25, skipped=0, already_present=125
+[00175/51350] processed, ingested=50, skipped=0, already_present=125
+[00200/51350] processed, ingested=75, skipped=0, already_present=125
+[00225/51350] processed, ingested=99, skipped=0, already_present=126
+[00250/51350] processed, ingested=124, skipped=0, already_present=126
+[00275/51350] processed, ingested=149, skipped=0, already_present=126
+[00300/51350] processed, ingested=174, skipped=0, already_present=126

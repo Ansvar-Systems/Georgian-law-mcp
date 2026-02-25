@@ -1,0 +1,32 @@
+{
+  "id": "ge-doc-3101015",
+  "type": "statute",
+  "title": "„თავისუფლების ქარტია“ საქართველოს კანონით განსაზღვრული კომისიის შემადგენლობისა და საქმიანობის წესის შესახებ დებულების დამტკიცების თაობაზე",
+  "short_name": "კანონი-3101015",
+  "status": "in_force",
+  "issued_date": "2015-12-21",
+  "in_force_date": "2015-12-21",
+  "url": "https://www.matsne.gov.ge/ka/document/view/3101015?publication=5",
+  "description": "Official consolidated legislation text published by the Legislative Herald of Georgia (matsne.gov.ge).",
+  "provisions": [
+    {
+      "provision_ref": "art2",
+      "section": "2",
+      "title": "მუხლი 2",
+      "content": "კომისიის შემადგენლობაში ასევე შედიან საქართველოს პარლამენტის ფრაქციების მიერ საქართველოს სახელმწიფო უსაფრთხოების სამსახურში წარმოდგენილი წევრები, რომლებიც სარგებლობენ ხმის უფლებით და იმავდროულად ითვლებიან კომისიის წევრებად."
+    },
+    {
+      "provision_ref": "art3",
+      "section": "3",
+      "title": "მუხლი 3",
+      "content": "დამტკიცდეს კომისიის საქმიანობის წესი თანდართული რედაქციით."
+    },
+    {
+      "provision_ref": "art4",
+      "section": "4",
+      "title": "მუხლი 4",
+      "content": "ეს ბრძანება ამოქმედდეს 2016 წლის 1 იანვრიდან."
+    }
+  ],
+  "definitions": []
+}

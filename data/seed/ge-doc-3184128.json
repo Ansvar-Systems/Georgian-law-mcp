@@ -1,0 +1,32 @@
+{
+  "id": "ge-doc-3184128",
+  "type": "statute",
+  "title": "ქალაქ გორის მუნიციპალიტეტის სიმბოლოების - გერბის და დროშის დამტკიცების შესახებ",
+  "short_name": "DOC-3184128",
+  "status": "in_force",
+  "issued_date": "2016-02-05",
+  "in_force_date": "2016-02-05",
+  "url": "https://www.matsne.gov.ge/ka/document/view/3184128?publication=1",
+  "description": "Official consolidated legislation text published by the Legislative Herald of Georgia (matsne.gov.ge).",
+  "provisions": [
+    {
+      "provision_ref": "art1",
+      "section": "1",
+      "title": "მუხლი 1",
+      "content": "დამტკიცდეს ქალაქ გორის მუნიციპალიტეტის გერბი №1, დანართის თანახმად (№1 დანართი თან ერთვის 1 ფურცლად)."
+    },
+    {
+      "provision_ref": "art2",
+      "section": "2",
+      "title": "მუხლი 2",
+      "content": "დამტკიცდეს ქალაქ გორის მუნიციპალიტეტის დროშა №2, დანართის თანახმად (№2 დანართი თან ერთვის 1 ფურცლად)."
+    },
+    {
+      "provision_ref": "art3",
+      "section": "3",
+      "title": "მუხლი 3",
+      "content": "დადგენილება ამოქმედდეს გამოქვეყნებისთანავე."
+    }
+  ],
+  "definitions": []
+}

@@ -1,0 +1,28 @@
+{
+  "id": "ge-doc-1765133",
+  "type": "statute",
+  "title": "ქ. თბილისის საკრებულოს საერთაშორისო ურთიერთობების კომისიის დებულების დამტკიცების შესახებ",
+  "short_name": "DOC-1765133",
+  "status": "in_force",
+  "issued_date": "2012-10-26",
+  "in_force_date": "2012-10-26",
+  "url": "https://www.matsne.gov.ge/ka/document/view/1765133?publication=1",
+  "description": "Official consolidated legislation text published by the Legislative Herald of Georgia (matsne.gov.ge).",
+  "provisions": [
+    {
+      "provision_ref": "art7",
+      "chapter": "თავი III კომისიის სხდომები",
+      "section": "7",
+      "title": "მუხლი 7",
+      "content": "საკრებულოს თავმჯდომარის მოთხოვნით ან შესაბამისი კომისიების გადაწყვეტილებით შეიძლება გაიმართოს კომისიების ერთობლივი სხდომა. ერთობლივ სხდომაზე განხილულ საკითხებთან დაკავშირებით კომისიები ცალ-ცალკე კენჭისყრით იღებენ შესაბამის გადაწყვეტილებას."
+    },
+    {
+      "provision_ref": "art11",
+      "chapter": "თავი VI დასკვნითი დებულებები",
+      "section": "11",
+      "title": "მუხლი 11",
+      "content": "კომისიის დებულებაში ცვლილების შეტანა ხდება „ნორმატიული აქტების შესახებ” საქართველოს კანონით დადგენილი წესით."
+    }
+  ],
+  "definitions": []
+}

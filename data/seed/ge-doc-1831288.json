@@ -1,0 +1,38 @@
+{
+  "id": "ge-doc-1831288",
+  "type": "statute",
+  "title": "ინფორმაციული აქტივების მართვის წესების დამტკიცების შესახებ",
+  "short_name": "DOC-1831288",
+  "status": "in_force",
+  "issued_date": "2013-02-07",
+  "in_force_date": "2013-02-07",
+  "url": "https://www.matsne.gov.ge/ka/document/view/1831288?publication=1",
+  "description": "Official consolidated legislation text published by the Legislative Herald of Georgia (matsne.gov.ge).",
+  "provisions": [
+    {
+      "provision_ref": "art1",
+      "section": "1",
+      "title": "მუხლი 1",
+      "content": "დამტკიცდეს ,,ინფორმაციული აქტივების მართვის წესები\"."
+    },
+    {
+      "provision_ref": "art2",
+      "section": "2",
+      "title": "მუხლი 2",
+      "content": "ეს ბრძანება ამოქმედდეს გამოქვეყნებისთანავე."
+    },
+    {
+      "provision_ref": "art3",
+      "section": "3",
+      "title": "მუხლი 3. აქტივების მართვა",
+      "content": "„ინფორმაციული უსაფრთხოების შესახებ“ საქართველოს კანონის მე-5 მუხლის მე-4 პუნქტის თანახმად, აქტივების მართვა გულისხმობს შემდეგს: აღწერა, კლასიფიცირება, წვდომა, შეცვლა, განადგურება."
+    },
+    {
+      "provision_ref": "art8",
+      "section": "8",
+      "title": "მუხლი 8. აქტივის მართვის წესები",
+      "content": "ორგანიზაცია განსაზღვრავს ინფორმაციული უსაფრთხოების პოლიტიკიდან, პროცედურებიდან და კონტროლის მექანიზმებიდან გამომდინარე აქტივების მართვის წესებს აღნიშნული ბრძანების დანართი №1-ის შესაბამისად."
+    }
+  ],
+  "definitions": []
+}

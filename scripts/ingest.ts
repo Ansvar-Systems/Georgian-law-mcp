@@ -33,6 +33,7 @@ const REPORT_PATH = path.resolve(__dirname, '../data/ingestion-report.json');
 const MATSNE_BASE = 'https://www.matsne.gov.ge';
 const KA_VIEW = `${MATSNE_BASE}/ka/document/view`;
 const SEARCH_URL = `${MATSNE_BASE}/ka/document/search`;
+const DOC_CONVERSION_TIMEOUT_MS = 180_000;
 
 const LISTING_URLS = [
   `${MATSNE_BASE}/ka/active-codes`,
@@ -277,8 +278,16 @@ function convertDocBufferToText(buffer: Buffer, documentId: number): string | un
     const result = spawnSync(
       'soffice',
       ['--headless', '--convert-to', 'txt:Text', '--outdir', tmpDir, docPath],
-      { encoding: 'utf8' }
+      {
+        encoding: 'utf8',
+        timeout: DOC_CONVERSION_TIMEOUT_MS,
+        killSignal: 'SIGKILL',
+      }
     );
+
+    if (result.error) {
+      return undefined;
+    }
 
     if (result.status !== 0 || !fs.existsSync(txtPath)) {
       return undefined;

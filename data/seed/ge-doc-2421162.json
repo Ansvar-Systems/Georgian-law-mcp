@@ -1,0 +1,39 @@
+{
+  "id": "ge-doc-2421162",
+  "type": "statute",
+  "title": "წალენჯიხის მუნიციპალიტეტის საკრებულოს რეგლამენტი",
+  "short_name": "DOC-2421162",
+  "status": "in_force",
+  "issued_date": "2014-07-24",
+  "in_force_date": "2014-07-24",
+  "url": "https://www.matsne.gov.ge/ka/document/view/2421162?publication=18",
+  "description": "Official consolidated legislation text published by the Legislative Herald of Georgia (matsne.gov.ge).",
+  "provisions": [
+    {
+      "provision_ref": "art1",
+      "section": "1",
+      "title": "მუხლი 1",
+      "content": "დამტკიცდეს წალენჯიხის მუნიციპალიტეტის საკრებულოს რეგლამენტი დანართის შესაბამისად."
+    },
+    {
+      "provision_ref": "art2",
+      "section": "2",
+      "title": "მუხლი 2",
+      "content": "ძალადაკარგულად გამოცხადდეს „საკრებულოს დებულების (რეგლამენტის) შესახებ' წალენჯიხის მუნიციპალიტეტის საკრებულოს 2010 წლის 24 სექტემბრის №14 დადგენილება ( სსმ, 38, 15/10/2010, სარეგისტრაციო კოდი: 010250040.35.104.016003)."
+    },
+    {
+      "provision_ref": "art3",
+      "section": "3",
+      "title": "მუხლი 3",
+      "content": "დადგენილება ამოქმედდეს 2014 წლის 24 ივლისიდან."
+    },
+    {
+      "provision_ref": "art5",
+      "chapter": "თავი I ზოგადი დებულებები",
+      "section": "5",
+      "title": "მუხლი 5. საკრებულოს სამუშაო და საქმისწარმოების ენა",
+      "content": "საკრებულოს სამუშაო და საქმისწარმოების ენაა საქართველოს სახელმწიფო ენა."
+    }
+  ],
+  "definitions": []
+}

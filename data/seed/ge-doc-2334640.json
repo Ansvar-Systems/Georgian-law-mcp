@@ -1,0 +1,32 @@
+{
+  "id": "ge-doc-2334640",
+  "type": "statute",
+  "title": "ზუგდიდის მუნიციპალიტეტის საკრებულოს წევრის მიერ ამომრჩევლებისათის ანგარიშის ჩაბარების წესის შესახებ",
+  "short_name": "DOC-2334640",
+  "status": "in_force",
+  "issued_date": "2014-04-30",
+  "in_force_date": "2014-04-30",
+  "url": "https://www.matsne.gov.ge/ka/document/view/2334640?publication=1",
+  "description": "Official consolidated legislation text published by the Legislative Herald of Georgia (matsne.gov.ge).",
+  "provisions": [
+    {
+      "provision_ref": "art1",
+      "section": "1",
+      "title": "მუხლი 1",
+      "content": "დამტკიცდეს ზუგდიდის მუნიციპალიტეტის საკრებულოს წევრის ამომრჩევლებისათვის ანგარიშის ჩაბარების წესი (დანართი №1)."
+    },
+    {
+      "provision_ref": "art2",
+      "section": "2",
+      "title": "მუხლი 2",
+      "content": "დამტკიცდეს ზუგდიდის მუნიციპალიტეტის საკრებულოს წევრის საქმიანობის ანგარიშის ფორმა (დანართი №2)."
+    },
+    {
+      "provision_ref": "art3",
+      "section": "3",
+      "title": "მუხლი 3",
+      "content": "დადგენილება ამოქმედდეს გამოქვეყნებისთანავე."
+    }
+  ],
+  "definitions": []
+}
