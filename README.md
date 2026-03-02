@@ -8,8 +8,8 @@
 [![GitHub stars](https://img.shields.io/github/stars/Ansvar-Systems/Georgian-law-mcp?style=social)](https://github.com/Ansvar-Systems/Georgian-law-mcp)
 [![CI](https://github.com/Ansvar-Systems/Georgian-law-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/Ansvar-Systems/Georgian-law-mcp/actions/workflows/ci.yml)
 [![Daily Data Check](https://github.com/Ansvar-Systems/Georgian-law-mcp/actions/workflows/check-updates.yml/badge.svg)](https://github.com/Ansvar-Systems/Georgian-law-mcp/actions/workflows/check-updates.yml)
-[![Database](https://img.shields.io/badge/database-pre--built-green)](docs/EU_INTEGRATION_GUIDE.md)
-[![Provisions](https://img.shields.io/badge/provisions-35%2C463-blue)](docs/EU_INTEGRATION_GUIDE.md)
+[![Database](https://img.shields.io/badge/database-pre--built-green)](https://github.com/Ansvar-Systems/Georgian-law-mcp)
+[![Provisions](https://img.shields.io/badge/provisions-35%2C463-blue)](https://github.com/Ansvar-Systems/Georgian-law-mcp)
 
 Query **943 Georgian statutes** -- from პერსონალური მონაცემების დაცვის შესახებ კანონი and სისხლის სამართლის კოდექსი to სამოქალაქო კოდექსი, ადმინისტრაციული კოდექსი, and more -- directly from Claude, Cursor, or any MCP-compatible client.
 
@@ -296,8 +296,6 @@ Queries go through the Claude API. For privileged or confidential matters, use o
 
 ## Documentation
 
-- **[EU Integration Guide](docs/EU_INTEGRATION_GUIDE.md)** -- Detailed EU cross-reference documentation
-- **[EU Usage Examples](docs/EU_USAGE_EXAMPLES.md)** -- Practical EU lookup examples
 - **[Security Policy](SECURITY.md)** -- Vulnerability reporting and scanning details
 - **[Disclaimer](DISCLAIMER.md)** -- Legal disclaimers and professional use notices
 - **[Privacy](PRIVACY.md)** -- Client confidentiality and data handling
