@@ -32,12 +32,12 @@ export function generateResponseMetadata(
   }
 
   return {
-    data_source: 'Official Legal Database (matsne.gov.ge) — Government (State Chancellery of Georgian)',
-    jurisdiction: 'EE',
+    data_source: 'Legislative Herald of Georgia (matsne.gov.ge) — Ministry of Justice of Georgia',
+    jurisdiction: 'GE',
     disclaimer:
-      'This data is sourced from the Official Legal Database under public domain. ' +
-      'The authoritative versions are maintained by Government (State Chancellery of Georgian). ' +
-      'Always verify with the official Official Legal Database portal (matsne.gov.ge).',
+      'This data is sourced from the Legislative Herald of Georgia under public domain. ' +
+      'The authoritative versions are maintained by the Ministry of Justice of Georgia (matsne.gov.ge). ' +
+      'Always verify with the official Legislative Herald portal (matsne.gov.ge).',
     freshness,
   };
 }
